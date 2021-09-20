@@ -1,7 +1,7 @@
 # COEN390Project
 <div>
-  <h2>COEN390 Project for fall semester of 2021 </h2>
-  <h4>List of students working on the project :</h4>
+  <p>COEN390 Project for fall semester of 2021 </p>
+  <h2>List of students working on the project :</h2>
   <ul>
     <li>Omar Mahmoud: 40158125 COEN</li>
     <li>Taher Akkad: 24443179 ELEC</li>
