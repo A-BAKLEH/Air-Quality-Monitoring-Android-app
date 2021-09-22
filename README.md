@@ -7,7 +7,7 @@
     <li>Taher Akkad: 24443179 ELEC</li>
     <li>Stefan Livadariu: 40031231 COEN</li>
     <li>Athanas Bakleh: 40093110 COEN</li>
-    <li>Lucas Hutton: 27220812 COEN</li>
+    <li>Lucas Hotton: 27220812 COEN</li>
     <li>Dina Yashaev: 27613822 COEN</li>
   </ul>
 </div>
