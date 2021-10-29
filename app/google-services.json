@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "304082454813",
+    "firebase_url": "https://coen-390-901e3-default-rtdb.firebaseio.com",
+    "project_id": "coen-390-901e3",
+    "storage_bucket": "coen-390-901e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304082454813:android:f4e0365a850555472039f4",
+        "android_client_info": {
+          "package_name": "com.example.ceon390_projectgroup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304082454813-g957lnvn6v1gkp261b7aickbs4mv5tsj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN0qjynnCXizQ4IGn92QzJtd1gOLgEZGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304082454813-g957lnvn6v1gkp261b7aickbs4mv5tsj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
