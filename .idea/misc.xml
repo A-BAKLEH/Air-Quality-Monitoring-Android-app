@@ -4,6 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/athan/AndroidStudioProjects/CEON390ProjectGroup/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.175390625" />
+        <entry key="app/src/main/res/layout/activity_database.xml" value="0.16041666666666668" />
+        <entry key="app/src/main/res/layout/activity_developers.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_live.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1188118811881188" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.10572916666666667" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.10572916666666667" />
+        <entry key="app/src/main/res/layout/fragment_third.xml" value="0.10572916666666667" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.1" />
       </map>
     </option>
   </component>
