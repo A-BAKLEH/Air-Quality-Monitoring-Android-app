@@ -11,4 +11,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="retrieve_data">Retrieve Data</string>
     <string name="sensor_values">Sensor Values:</string>
+    <string name="title_activity_live_monitoring">LiveMonitoring</string>
+    <string name="title_activity_database">Database</string>
 </resources>

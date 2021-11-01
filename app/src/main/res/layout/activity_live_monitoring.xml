@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LiveMonitoring">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#303030"
+        tools:context=".LiveMonitoring">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#212121"
+            android:theme="@style/Theme.CEON390ProjectGroup.AppBarOverlay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:popupTheme="@style/Theme.CEON390ProjectGroup.PopupOverlay" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <TextView
+            android:id="@+id/MQ135Sensor"
+            android:layout_width="132dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/MQ4Sensor"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/MQ4Sensor"
+            app:layout_constraintTop_toBottomOf="@+id/idTVRetrieveData" />
+
+        <TextView
+            android:id="@+id/idTVRetrieveData7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_horizontal"
+            android:text="TVOC Sensor"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MQ9Sensor"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/idTVRetrieveData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:text="MQ135 Sensor"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CO2Sensor"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/MQ9Sensor"
+            android:layout_width="132dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="76dp"
+            android:layout_marginRight="76dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/idTVRetrieveData6"
+            app:layout_constraintTop_toBottomOf="@+id/idTVRetrieveData6" />
+
+        <TextView
+            android:id="@+id/CO2Sensor"
+            android:layout_width="147dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/idTVRetrieveData2"
+            app:layout_constraintTop_toBottomOf="@+id/idTVRetrieveData2" />
+
+        <TextView
+            android:id="@+id/idTVRetrieveData6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center_horizontal"
+            android:text="MQ9 Sensor"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MQ8Sensor"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/MQ8Sensor"
+            android:layout_width="137dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="76dp"
+            android:layout_marginRight="76dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/idTVRetrieveData5"
+            app:layout_constraintTop_toBottomOf="@+id/idTVRetrieveData5" />
+
+        <TextView
+            android:id="@+id/idTVRetrieveData5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="MQ8 Sensor"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_anchorGravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MQ4Sensor"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/TVOCsensor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/MQ8Sensor"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/MQ9Sensor"
+            app:layout_constraintTop_toBottomOf="@+id/idTVRetrieveData7" />
+
+        <TextView
+            android:id="@+id/idTVRetrieveData2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:gravity="center_horizontal"
+            android:text="CO2 Sensor"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+            tools:fontFamily="monospace"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/MQ4Sensor"
+            android:layout_width="123dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="92dp"
+            android:layout_marginRight="92dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/idTVRetrieveData4"
+            app:layout_constraintTop_toBottomOf="@+id/idTVRetrieveData4" />
+
+        <TextView
+            android:id="@+id/idTVRetrieveData3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="MQ2 Sensor"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MQ135Sensor"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/idTVRetrieveData4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center_horizontal"
+            android:text="MQ4 Sensor"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MQ2Sensor"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/MQ2Sensor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginRight="9dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/CO2Sensor"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/MQ9Sensor"
+            app:layout_constraintTop_toBottomOf="@+id/idTVRetrieveData3" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
