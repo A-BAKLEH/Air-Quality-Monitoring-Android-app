@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.ceon390_projectgroup"
-        minSdk 16
+        minSdk 21
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -41,12 +41,11 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
     //Adding Firebase to Android App (codes provided by console.firebase.google.com)
     implementation platform('com.google.firebase:firebase-bom:28.4.2') //Import BoM for the Firebase platform
     implementation 'com.google.firebase:firebase-database' //when using BoM don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-analytics'  //add dependency for Firebase SDK for Google Analytics
-
+    implementation 'com.github.Gruzer:simple-gauge-android:0.3.1'
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-librarie
 }

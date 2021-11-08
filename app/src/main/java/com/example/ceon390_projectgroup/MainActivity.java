@@ -9,14 +9,14 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ekn.gruzer.gaugelibrary.MultiGauge;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    Button monitoringButton;
-    Button databaseButton;
     BottomNavigationView navBar;
+    MultiGauge mainGauge;
 
 
     @Override
@@ -24,10 +24,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        monitoringButton= findViewById(R.id.monitorringBttn);
-        databaseButton = findViewById(R.id.databaseBtn);
         navBar = findViewById(R.id.navBar);
         navBar.setSelectedItemId(R.id.home_nav);
+        mainGauge = findViewById(R.id.multiGauge);
 
         navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.settings_nav:
-                        startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
+                        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
                         overridePendingTransition(0,0);
 
                         return true;
@@ -47,28 +46,5 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        monitoringButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToLiveMonitoring();
-            }
-        });
-        databaseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToDatabase();
-            }
-        });
-    }
-
-    public void goToLiveMonitoring(){
-        Intent intent = new Intent(this, LiveMonitoring.class);
-        startActivity(intent);
-    }
-
-    public void goToDatabase() {
-        Intent intent = new Intent(this, DatabaseActivity.class);
-        startActivity(intent);
     }
 }
