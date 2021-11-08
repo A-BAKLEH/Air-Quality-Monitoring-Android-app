@@ -1,6 +1,9 @@
 package com.example.ceon390_projectgroup;
 
+import android.content.Intent;
 import android.os.Bundle;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -10,6 +13,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +34,8 @@ public class LiveMonitoring extends AppCompatActivity {
     TextView TVOCvalues;
     TextView MQ9values;
 
+    BottomNavigationView navBar;
+
     DatabaseReference databaseReference;
 
     @Override
@@ -44,6 +51,27 @@ public class LiveMonitoring extends AppCompatActivity {
         MQ8values = findViewById(R.id.MQ8Sensor);
         MQ9values = findViewById(R.id.MQ9Sensor);
         TVOCvalues = findViewById(R.id.TVOCsensor);
+        navBar = findViewById(R.id.navBar);
+        navBar.setSelectedItemId(R.id.live_nav);
+
+        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home_nav:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.settings_nav:
+                        startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
+                        overridePendingTransition(0,0);
+
+                        return true;
+                }
+
+                return false;
+            }
+        });
 
         Read();
 
