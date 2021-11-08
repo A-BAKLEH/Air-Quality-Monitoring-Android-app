@@ -40,8 +40,9 @@
 
     <com.ekn.gruzer.gaugelibrary.MultiGauge
         android:id="@+id/multiGauge"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="409dp"
+        android:layout_height="289dp"
+        android:stateListAnimator="@anim/nav_default_pop_enter_anim"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

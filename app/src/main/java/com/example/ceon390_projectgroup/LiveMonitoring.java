@@ -1,8 +1,11 @@
 package com.example.ceon390_projectgroup;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import com.ekn.gruzer.gaugelibrary.FullGauge;
+import com.ekn.gruzer.gaugelibrary.Range;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
@@ -24,15 +27,16 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LiveMonitoring extends AppCompatActivity {
 
-    TextView MQ135values;  //variable for text view
-    TextView MQ2values;
-    TextView CO2values;
-    TextView MQ4values;
-    TextView MQ8values;
-    TextView TVOCvalues;
-    TextView MQ9values;
+    FullGauge fullGaugeCO2;
+    FullGauge fullGaugeMQ135;
+    FullGauge fullGaugeMQ2;
+
+
 
     BottomNavigationView navBar;
 
@@ -43,16 +47,31 @@ public class LiveMonitoring extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_monitoring);
 
+        Range range3 = new Range();
+        range3.setColor(Color.parseColor("#00FF00"));
+        range3.setFrom(0);
+        range3.setTo(500);
+
         databaseReference = FirebaseDatabase.getInstance().getReference();  //get instance for firebase
-        MQ135values = findViewById(R.id.MQ135Sensor);  //initialize object class variable
-        MQ2values = findViewById(R.id.MQ2Sensor);
-        MQ4values = findViewById(R.id.MQ4Sensor);
-        CO2values = findViewById(R.id.CO2Sensor);
-        MQ8values = findViewById(R.id.MQ8Sensor);
-        MQ9values = findViewById(R.id.MQ9Sensor);
-        TVOCvalues = findViewById(R.id.TVOCsensor);
+        fullGaugeCO2 = findViewById(R.id.fullGaugeCO2);
+        fullGaugeMQ135 = findViewById(R.id.fullGaugeMQ135);
+        fullGaugeMQ2 = findViewById(R.id.fullGaugeMQ2);
+
         navBar = findViewById(R.id.navBar);
         navBar.setSelectedItemId(R.id.live_nav);
+
+        fullGaugeCO2.setMinValue(0);
+        fullGaugeCO2.setMaxValue(5000);
+        fullGaugeCO2.addRange(range3);
+
+        fullGaugeMQ135.setMinValue(0);
+        fullGaugeMQ135.setMaxValue(5000);
+        fullGaugeMQ135.addRange(range3);
+
+        fullGaugeMQ2.setMinValue(0);
+        fullGaugeMQ2.setMaxValue(5000);
+        fullGaugeMQ2.addRange(range3);
+
 
         navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -85,19 +104,19 @@ public class LiveMonitoring extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 String value = dataSnapshot.child("MQ135 Sensor").getValue().toString();
-                MQ135values.setText(value);
+                fullGaugeMQ135.setValue(Double.parseDouble(value));
                 String value1 = dataSnapshot.child("CO2 CCS811 Sensor").getValue().toString();
-                CO2values.setText(value1);
+                fullGaugeCO2.setValue(Double.parseDouble(value1));
                 String value2 = dataSnapshot.child("MQ2 Sensor").getValue().toString();
-                MQ2values.setText(value2);
-                String value3 = dataSnapshot.child("MQ4 Sensor").getValue().toString();
-                MQ4values.setText(value3);
-                String value4 = dataSnapshot.child("MQ8 Sensor").getValue().toString();
-                MQ8values.setText(value4);
-                String value5 = dataSnapshot.child("MQ9 Sensor").getValue().toString();
-                MQ9values.setText(value5);
-                String value6 = dataSnapshot.child("TVOC CCS811 Sensor").getValue().toString();
-                TVOCvalues.setText(value6);
+                fullGaugeMQ2.setValue(Double.parseDouble(value2));
+                //String value3 = dataSnapshot.child("MQ4 Sensor").getValue().toString();
+                //MQ4values.setText(value3);
+                //String value4 = dataSnapshot.child("MQ8 Sensor").getValue().toString();
+                //MQ8values.setText(value4);
+                //String value5 = dataSnapshot.child("MQ9 Sensor").getValue().toString();
+                //MQ9values.setText(value5);
+                //String value6 = dataSnapshot.child("TVOC CCS811 Sensor").getValue().toString();
+                //TVOCvalues.setText(value6);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
