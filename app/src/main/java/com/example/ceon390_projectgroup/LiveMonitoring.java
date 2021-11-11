@@ -274,7 +274,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
                 String sensorNameCO2 = tvSensorNameCO2.getText().toString();
                 String marketNameCO2 = "SparkFun CCS811 board";
                 String gasDetectionCO2 = tvSensorNameCO2.getText().toString();
-                String dangersCO2 = "CO2 produces many health effects, such as headaches, dizziness, restlessness," +
+                String dangersCO2 = "CO\u2082 produces many health effects, such as headaches, dizziness, restlessness," +
                         " difficulty breathing, sweating, increased heart rate, and convulsions";
                 String moreInfoCO2 = "shorturl.at/nBO46";
                 showDialog(sensorNameCO2, marketNameCO2, gasDetectionCO2, dangersCO2, moreInfoCO2);
