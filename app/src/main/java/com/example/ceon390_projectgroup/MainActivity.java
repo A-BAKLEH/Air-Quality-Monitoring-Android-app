@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView navBar;
@@ -32,24 +33,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DatabaseHelper db = new DatabaseHelper(this);
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-         Range range1 = new Range();
-         Range range2 = new Range();
-         Range range3 = new Range();
+        Range range1 = new Range();
+        Range range2 = new Range();
+        Range range3 = new Range();
 
-         range1.setColor(Color.parseColor("#ff0000"));
-         range1.setFrom(2000);
-         range1.setTo(5000);
+        range1.setColor(Color.parseColor("#ff0000"));
+        range1.setFrom(2000);
+        range1.setTo(5000);
 
-         range2.setColor(Color.parseColor("#FFA500"));
-         range2.setFrom(500);
-         range2.setTo(2000);
+        range2.setColor(Color.parseColor("#FFA500"));
+        range2.setFrom(500);
+        range2.setTo(2000);
 
         range3.setColor(Color.parseColor("#00FF00"));
         range3.setFrom(0);
         range3.setTo(500);
-
 
 
         navBar = findViewById(R.id.navBar);
@@ -67,19 +69,19 @@ public class MainActivity extends AppCompatActivity {
         mainGauge.addSecondRange(range2);
         mainGauge.addThirdRange(range3);
 
-        sensorReturn("CO2 CCS811 Sensor","MQ135 Sensor", "MQ8 Sensor");
+        sensorReturn("CO2 CCS811 Sensor", "MQ135 Sensor", "MQ8 Sensor");
 
         navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.live_nav :
+                switch (item.getItemId()) {
+                    case R.id.live_nav:
                         startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.settings_nav:
                         startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
 
                         return true;
                 }
@@ -87,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-    }
 
+    }
     public void sensorReturn(String sensorName1, String sensorName2 , String sensorName3) {
 
 
@@ -110,4 +112,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    
 }
