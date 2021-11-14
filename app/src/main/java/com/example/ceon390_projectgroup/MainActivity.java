@@ -18,13 +18,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView navBar;
     MultiGauge mainGauge;
-
+    public static ArrayList<String> SensorList = new ArrayList<>();
 
     DatabaseReference databaseReference;
 
@@ -89,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
     public void sensorReturn(String sensorName1, String sensorName2 , String sensorName3) {
 
@@ -112,5 +113,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    
+
 }

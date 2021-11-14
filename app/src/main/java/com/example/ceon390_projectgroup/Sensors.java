@@ -3,17 +3,20 @@ package com.example.ceon390_projectgroup;
 public class Sensors {
 
     private int ID;
-    private String Value;
+    private String Gas;
+    private Double Value;
     private String Timestamp;
 
     public Sensors(){
     }
-    public Sensors(int ID, String value, String timestamp) {
+    public Sensors(int ID, String gas, Double value, String timestamp) {
         this.ID = ID;
+        Gas = gas;
         Value = value;
         Timestamp = timestamp;
     }
-    public Sensors(String value, String timestamp) {
+    public Sensors(String gas, Double value, String timestamp) {
+        Gas = gas;
         Value = value;
         Timestamp = timestamp;
     }
@@ -26,11 +29,19 @@ public class Sensors {
         this.ID = ID;
     }
 
-    public String getValue() {
+    public Double getValue() {
         return Value;
     }
 
-    public void setValue(String value) {
+    public String getGas() {
+        return Gas;
+    }
+
+    public void setGas(String gas) {
+        Gas = gas;
+    }
+
+    public void setValue(Double value) {
         Value = value;
     }
 
