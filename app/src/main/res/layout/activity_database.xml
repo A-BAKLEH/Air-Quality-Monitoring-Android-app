@@ -8,11 +8,24 @@
     tools:context=".DatabaseActivity">
 
 
+    <ListView
+        android:id="@+id/databaseList"
+        android:layout_width="411dp"
+        android:layout_height="624dp"
+        app:layout_constraintBottom_toTopOf="@+id/navBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
+
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#212121"
-        android:theme="@style/Theme.CEON390ProjectGroup.AppBarOverlay">
+        android:theme="@style/Theme.CEON390ProjectGroup.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -27,12 +40,12 @@
         android:id="@+id/navBar"
         android:layout_width="416dp"
         android:layout_height="53dp"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:itemTextColor="@drawable/selector"
-        app:itemIconTint="@drawable/selector"
-        app:menu="@menu/menu_nav"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_nav" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

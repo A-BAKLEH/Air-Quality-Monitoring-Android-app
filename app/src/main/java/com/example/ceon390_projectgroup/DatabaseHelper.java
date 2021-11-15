@@ -76,21 +76,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Sensors> getAllValues() {
         List<Sensors> sensorList = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + SensorsTable.TABLE_NAME;
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
 
         if (cursor.moveToFirst()) {
             do {
                 Sensors value = new Sensors();
-                value.setID(cursor.getInt(0));
                 value.setGas(cursor.getString(1));
                 value.setValue(cursor.getDouble(2));
                 value.setTimestamp(cursor.getString(3));
 
-                String values = cursor.getString(1) +"\n" +
-                        cursor.getDouble(2) + "\n" + cursor.getString(3);
-                MainActivity.SensorList.add(values);
+                String values = cursor.getString(1) +" " +
+                      cursor.getDouble(2) + " " + cursor.getString(3);
+                DatabaseActivity.SensorList.add(values);
                 sensorList.add(value);
             }
             while (cursor.moveToNext());

@@ -147,15 +147,15 @@
         </LinearLayout>
 
         <android.widget.Button
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
             android:id="@+id/btnDone"
-            android:text="Done"
-            android:background="@drawable/btn_bg"
-            android:textColor="@color/white"
-            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_bg"
+            android:text="Done"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

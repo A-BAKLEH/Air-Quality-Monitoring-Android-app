@@ -1,5 +1,8 @@
 package com.example.ceon390_projectgroup;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Sensors {
 
     private int ID;
@@ -19,6 +22,15 @@ public class Sensors {
         Gas = gas;
         Value = value;
         Timestamp = timestamp;
+    }
+
+    public Sensors(String gas, Double value) {
+        String pattern = "yyyy-MM-dd @ HH:mm:ss";
+        SimpleDateFormat dateFormat =   new SimpleDateFormat(pattern);
+
+        Gas = gas;
+        Value = value;
+        this.Timestamp = dateFormat.format(new Date());
     }
 
     public int getID() {
