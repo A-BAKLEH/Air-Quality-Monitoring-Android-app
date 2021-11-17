@@ -80,6 +80,12 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
                         overridePendingTransition(0, 0);
                         return true;
+
+                    case R.id.database_nav:
+                        startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
                     case R.id.settings_nav:
                         startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
                         overridePendingTransition(0, 0);

@@ -39,6 +39,7 @@ public class DatabaseActivity extends AppCompatActivity {
 
 
         navBar  = findViewById(R.id.navBar);
+        navBar.setSelectedItemId(R.id.database_nav);
 
         navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

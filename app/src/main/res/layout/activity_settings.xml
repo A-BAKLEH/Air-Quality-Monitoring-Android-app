@@ -4,22 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#303030"
+    android:background="@color/white"
     tools:context=".DatabaseActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#212121"
-        android:theme="@style/Theme.CEON390ProjectGroup.AppBarOverlay">
+        android:background="#f4b350"
+        android:theme="@style/Theme.CEON390ProjectGroup.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#212121"
-            app:popupTheme="@style/Theme.CEON390ProjectGroup.PopupOverlay" />
+            android:background="#f4b350"
+            app:popupTheme="@style/Theme.CEON390ProjectGroup.PopupOverlay"
+            app:title="Settings" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

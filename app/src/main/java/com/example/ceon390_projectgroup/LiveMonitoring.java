@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class LiveMonitoring extends AppCompatActivity implements View.OnClickListener {
 
     /*FullGauge fullGaugeCO2;
@@ -66,6 +68,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_monitoring);
 
+
         databaseReference = FirebaseDatabase.getInstance().getReference();  //get instance for firebase
 
         initViews();
@@ -98,6 +101,10 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
                 switch (item.getItemId()) {
                     case R.id.home_nav:
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.database_nav:
+                        startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.settings_nav:
@@ -165,17 +172,17 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
     // This method is used to initialize the half gauges values
     private void initializeGaugesValues() {
         Range range1 = new Range();
-        range1.setColor(Color.parseColor("#00b20b"));
+        range1.setColor(Color.parseColor("#badc58"));
         range1.setFrom(0);
         range1.setTo(4500);
 
         Range range2 = new Range();
-        range2.setColor(Color.parseColor("#E3E500"));
+        range2.setColor(Color.parseColor("#f6e58d"));
         range2.setFrom(4501);
         range2.setTo(7500);
 
         Range range3 = new Range();
-        range3.setColor(Color.parseColor("#ce0000"));
+        range3.setColor(Color.parseColor("#ff7979"));
         range3.setFrom(7501);
         range3.setTo(9999);
 

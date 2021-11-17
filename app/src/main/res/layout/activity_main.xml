@@ -5,14 +5,14 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#303030"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#212121"
+        android:background="#f4b350"
         android:theme="@style/Theme.CEON390ProjectGroup.AppBarOverlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,9 +20,10 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:popupTheme="@style/Theme.CEON390ProjectGroup.PopupOverlay" />
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            app:popupTheme="@style/Theme.CEON390ProjectGroup.PopupOverlay"
+            app:title="Main Activity" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#303030"
+    android:background="@color/white"
     tools:context=".DatabaseActivity">
 
 
@@ -31,8 +31,10 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#212121"
-            app:popupTheme="@style/Theme.CEON390ProjectGroup.PopupOverlay" />
+            android:background="#f4b350"
+            app:popupTheme="@style/Theme.CEON390ProjectGroup.PopupOverlay"
+            app:title="Database"
+            />
 
     </com.google.android.material.appbar.AppBarLayout>
 

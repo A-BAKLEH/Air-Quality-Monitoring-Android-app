@@ -29,6 +29,10 @@ public class SettingsActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.database_nav:
+                        startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
                     case R.id.live_nav:
                         startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
                         overridePendingTransition(0,0);
