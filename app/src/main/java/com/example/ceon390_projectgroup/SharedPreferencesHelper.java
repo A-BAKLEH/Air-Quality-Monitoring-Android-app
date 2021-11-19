@@ -38,7 +38,7 @@ public class SharedPreferencesHelper {
     }
 
     public String getInnerSpinnerGas(){
-        return this.sharedPreferences.getString(this.context.getString(R.string.InnerSpinnerGas),null);
+        return this.sharedPreferences.getString(this.context.getString(R.string.InnerSpinnerGas),"MQ8 Sensor");
     }
 
     public void saveInnerSpinnerSelection(int sv){
@@ -58,7 +58,7 @@ public class SharedPreferencesHelper {
     }
 
     public String getMiddleSpinnerGas(){
-        return this.sharedPreferences.getString(this.context.getString(R.string.MiddleSpinnerGas),null);
+        return this.sharedPreferences.getString(this.context.getString(R.string.MiddleSpinnerGas),"MQ135 Sensor");
     }
 
     public void saveMiddleSpinnerSelection(int sv){
@@ -78,7 +78,7 @@ public class SharedPreferencesHelper {
     }
 
     public String getOuterSpinnerGas(){
-        return this.sharedPreferences.getString(this.context.getString(R.string.OuterSpinnerGas),null);
+        return this.sharedPreferences.getString(this.context.getString(R.string.OuterSpinnerGas),"MQ4 Sensor");
     }
 
     public void saveOuterSpinnerSelection(int sv){
