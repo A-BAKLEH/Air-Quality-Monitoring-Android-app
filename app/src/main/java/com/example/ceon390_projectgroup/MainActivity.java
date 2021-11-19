@@ -1,8 +1,13 @@
 package com.example.ceon390_projectgroup;
 
+import static com.example.ceon390_projectgroup.SettingsActivity.SENSOR;
+import static com.example.ceon390_projectgroup.SettingsActivity.sensors;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -27,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navBar;
     MultiGauge mainGauge;
 
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference; //For Firebase
+    SharedPreferencesHelper sharedPreferencesHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         DatabaseHelper db = new DatabaseHelper(this);
-
+        sharedPreferencesHelper = new SharedPreferencesHelper(getApplicationContext());
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         Range range1 = new Range();
@@ -48,12 +54,11 @@ public class MainActivity extends AppCompatActivity {
 
         range2.setColor(Color.parseColor("#f89406"));
         range2.setFrom(0);
-        range2.setTo(50);
+        range2.setTo(500);
 
         range3.setColor(Color.parseColor("#f5e51b"));
         range3.setFrom(0);
         range3.setTo(500);
-
 
         navBar = findViewById(R.id.navBar);
         navBar.setSelectedItemId(R.id.home_nav);
@@ -70,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         mainGauge.addSecondRange(range2);
         mainGauge.addThirdRange(range3);
 
-        sensorReturn("CO2 CCS811 Sensor", "MQ9 Sensor", "TVOC CCS811 Sensor");
+        sensorReturn("MQ8 Sensor", "MQ2 Sensor", "MQ4 Sensor"); //Default values
 
         navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -97,19 +102,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void sensorReturn(String sensorName1, String sensorName2 , String sensorName3) {
 
+    protected void onResume(){
+        super.onResume();
+        sensorReturn(sharedPreferencesHelper.getOuterSpinnerGas(), sharedPreferencesHelper.getMiddleSpinnerGas(), sharedPreferencesHelper.getInnerSpinnerGas());
+    }
+
+    public void sensorReturn(String sensorName1, String sensorName2 , String sensorName3) {
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String value1 = snapshot.child(sensorName1).getValue().toString();
-                String value2 = snapshot.child(sensorName2).getValue().toString();
-                String value3 = snapshot.child(sensorName3).getValue().toString();
+                String value1 = snapshot.child(sensorName1).getValue().toString(); //Outer Ring
+                String value2 = snapshot.child(sensorName2).getValue().toString(); //Middle Ring
+                String value3 = snapshot.child(sensorName3).getValue().toString(); //Inner Ring
 
-                mainGauge.setValue(Double.parseDouble(value1));
-                mainGauge.setSecondValue(Double.parseDouble(value2));
-                mainGauge.setThirdValue(Double.parseDouble(value3));
+                mainGauge.setValue(Double.parseDouble(value1)); //Set value outer ring
+                mainGauge.setSecondValue(Double.parseDouble(value2)); //Set value middle ring
+                mainGauge.setThirdValue(Double.parseDouble(value3)); //Set value inner ring
             }
 
             @Override
