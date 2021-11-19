@@ -263,6 +263,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
     // Overrided method to handle the click on views
     /**
      * @param view
+     * /*app:title="Live Monitoring"
      */
     @Override
     public void onClick(View view) {
@@ -283,7 +284,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
                 String gasDetectionCO2 = tvSensorNameCO2.getText().toString();
                 String dangersCO2 = "CO\u2082 produces many health effects, such as headaches, dizziness, restlessness," +
                         " difficulty breathing, sweating, increased heart rate, and convulsions";
-                String moreInfoCO2 = "shorturl.at/nBO46";
+                String moreInfoCO2 = "https://www.cdc.gov/niosh/npg/npgd0103.html";
                 showDialog(sensorNameCO2, marketNameCO2, gasDetectionCO2, dangersCO2, moreInfoCO2);
                 break;
             case R.id.ivMQ135:
@@ -292,7 +293,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
                 String gasDetectionMQ135 = tvSensorNameMQ135.getText().toString();
                 String dangersMQ135 = "High concentrations of Ammonia in air causes immediate burning " +
                         "of the eyes, nose, throat and respiratory tract and can result in blindness, lung damage or death";
-                String moreInfoMQ135 = "shorturl.at/lstMP";
+                String moreInfoMQ135 = "https://www.ccohs.ca/oshanswers/chemicals/chem_profiles/ammonia.html";
                 showDialog(sensorNameMQ135, marketNameMQ135, gasDetectionMQ135, dangersMQ135, moreInfoMQ135);
                 break;
             case R.id.ivMQ2:
@@ -300,7 +301,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
                 String marketNameMQ2 = "MQ2 Sensor";
                 String gasDetectionMQ2 = tvSensorNameMQ2.getText().toString();
                 String dangersMQ2 = "Inhaling harmful smoke can inflame lungs and airway, causing them to swell and block oxygen";
-                String moreInfoMQ2 = "shorturl.at/uCPRY";
+                String moreInfoMQ2 = "https://www.epa.gov/pm-pollution/how-smoke-fires-can-affect-your-health";
                 showDialog(sensorNameMQ2, marketNameMQ2, gasDetectionMQ2, dangersMQ2, moreInfoMQ2);
                 break;
             case R.id.ivMQ4:

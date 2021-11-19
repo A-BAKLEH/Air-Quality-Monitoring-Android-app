@@ -24,6 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#f4b350"
+        android:visibility="gone"
         android:theme="@style/Theme.CEON390ProjectGroup.AppBarOverlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -35,9 +36,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:popupTheme="@style/Theme.CEON390ProjectGroup.PopupOverlay"
-            app:title="Live Monitoring" />
+             />
 
     </com.google.android.material.appbar.AppBarLayout>
+    <RelativeLayout
+        android:id="@+id/relative_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#f4b350">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Live Monitoring"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -46,7 +66,7 @@
         android:layout_marginBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintTop_toBottomOf="@+id/relative_toolbar"
         app:layout_constraintBottom_toTopOf="@+id/navBar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
