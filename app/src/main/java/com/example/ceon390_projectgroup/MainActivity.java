@@ -44,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferencesHelper = new SharedPreferencesHelper(getApplicationContext());
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        String sensors = " ";
+        System.out.print(sensors + db.getAllValues());
+        System.out.println();
+
         Range range1 = new Range();
         Range range2 = new Range();
         Range range3 = new Range();
