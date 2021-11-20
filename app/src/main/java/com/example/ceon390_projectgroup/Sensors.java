@@ -7,30 +7,35 @@ public class Sensors {
 
     private int ID;
     private String Gas;
-    private Double Value;
+    private String Value;
     private String Timestamp;
 
-    public Sensors(){
+    public Sensors(int i, String deleted){
     }
-    public Sensors(int ID, String gas, Double value, String timestamp) {
+
+    public Sensors(int ID, String gas, String value, String timestamp) {
         this.ID = ID;
         Gas = gas;
         Value = value;
         Timestamp = timestamp;
     }
-    public Sensors(String gas, Double value, String timestamp) {
+    public Sensors(String gas, String value, String timestamp) {
         Gas = gas;
         Value = value;
         Timestamp = timestamp;
     }
 
-    public Sensors(String gas, Double value) {
+    public Sensors(String gas, String value) {
         String pattern = "yyyy-MM-dd @ HH:mm:ss";
         SimpleDateFormat dateFormat =   new SimpleDateFormat(pattern);
 
         Gas = gas;
         Value = value;
         this.Timestamp = dateFormat.format(new Date());
+    }
+
+    public Sensors(int ID) {
+        this.ID = ID;
     }
 
     public int getID() {
@@ -41,7 +46,7 @@ public class Sensors {
         this.ID = ID;
     }
 
-    public Double getValue() {
+    public String getValue() {
         return Value;
     }
 
@@ -53,7 +58,7 @@ public class Sensors {
         Gas = gas;
     }
 
-    public void setValue(Double value) {
+    public void setValue(String value) {
         Value = value;
     }
 
