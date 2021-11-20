@@ -9,10 +9,10 @@
 
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#f4b350"
-        android:visibility="gone"
+        android:background="#212121"
         android:theme="@style/Theme.CEON390ProjectGroup.AppBarOverlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,29 +23,10 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#f4b350"
-            app:popupTheme="@style/Theme.CEON390ProjectGroup.PopupOverlay"
             app:title="Settings" />
 
     </com.google.android.material.appbar.AppBarLayout>
-    <RelativeLayout
-        android:id="@+id/relative_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="#f4b350">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Settings"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-
-    </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navBar"
         android:layout_width="416dp"
@@ -56,6 +37,114 @@
         app:itemIconTint="@drawable/selector"
         app:menu="@menu/menu_nav"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/LocationEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="@string/LocationHint"
+        android:inputType="textPersonName"
+        android:text="@string/LocationEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout3" />
+
+    <EditText
+        android:id="@+id/RoomEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="@string/RoomHint"
+        android:inputType="textPersonName"
+        android:text="@string/RoomEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LocationEditText" />
+
+    <TextView
+        android:id="@+id/InnerRingTextView"
+        android:layout_width="230dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center_vertical"
+        android:text="Inner Ring Sensor Display"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RoomEditText" />
+
+    <TextView
+        android:id="@+id/MiddleRingTextView"
+        android:layout_width="230dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center_vertical"
+        android:text="Middle Ring Sensor Display"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InnerSpinner" />
+
+    <TextView
+        android:id="@+id/OuterRingTextView"
+        android:layout_width="230dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center_vertical"
+        android:text="Outer Ring Sensor Display"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MiddleSpinner" />
+
+    <Button
+        android:id="@+id/SaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OuterSpinner" />
+
+    <Spinner
+        android:id="@+id/InnerSpinner"
+        android:layout_width="230dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InnerRingTextView" />
+
+    <Spinner
+        android:id="@+id/MiddleSpinner"
+        android:layout_width="230dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MiddleRingTextView" />
+
+    <Spinner
+        android:id="@+id/OuterSpinner"
+        android:layout_width="230dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OuterRingTextView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

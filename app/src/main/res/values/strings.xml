@@ -14,4 +14,15 @@
     <string name="title_activity_live_monitoring">LiveMonitoring</string>
     <string name="title_activity_database">Database</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="SharedPreferences">Shared Preferences</string>
+    <string name="LocationHint">Enter Location Name</string>
+    <string name="RoomHint">Enter Room Name</string>
+    <string name="LocationEditText">Location Edit</string>
+    <string name="RoomEditText">Room Edit</string>
+    <string name="InnerSpinner">Inner Spinner Value</string>
+    <string name="InnerSpinnerGas">Inner Spinner Gas</string>
+    <string name="MiddleSpinner">Middle Spinner Value</string>
+    <string name="MiddleSpinnerGas">Middle Spinner Gas</string>
+    <string name="OuterSpinner">Outer Spinner Value</string>
+    <string name="OuterSpinnerGas">Outer Spinner Gas</string>
 </resources>
