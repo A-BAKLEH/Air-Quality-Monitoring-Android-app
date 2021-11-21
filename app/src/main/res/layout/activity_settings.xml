@@ -42,13 +42,14 @@
         android:id="@+id/LocationEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="@string/LocationHint"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:text="@string/LocationEditText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.398"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout3" />
 
@@ -56,96 +57,98 @@
         android:id="@+id/RoomEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="@string/RoomHint"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:text="@string/RoomEditText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.398"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LocationEditText" />
-
-    <TextView
-        android:id="@+id/InnerRingTextView"
-        android:layout_width="230dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="32dp"
-        android:gravity="center_vertical"
-        android:text="Inner Ring Sensor Display"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RoomEditText" />
 
     <TextView
         android:id="@+id/MiddleRingTextView"
         android:layout_width="230dp"
         android:layout_height="30dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="44dp"
         android:gravity="center_vertical"
         android:text="Middle Ring Sensor Display"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/InnerSpinner" />
-
-    <TextView
-        android:id="@+id/OuterRingTextView"
-        android:layout_width="230dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="32dp"
-        android:gravity="center_vertical"
-        android:text="Outer Ring Sensor Display"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MiddleSpinner" />
-
-    <Button
-        android:id="@+id/SaveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:backgroundTint="#30336b"
-        android:text="Save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OuterSpinner" />
-
-    <Spinner
-        android:id="@+id/InnerSpinner"
-        android:layout_width="230dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InnerRingTextView" />
 
     <Spinner
         android:id="@+id/MiddleSpinner"
         android:layout_width="230dp"
         android:layout_height="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MiddleRingTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/MiddleRingTextView"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/OuterSpinner"
         android:layout_width="230dp"
         android:layout_height="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/OuterRingTextView" />
+
+    <TextView
+        android:id="@+id/InnerRingTextView"
+        android:layout_width="230dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="108dp"
+        android:gravity="center_vertical"
+        android:text="Inner Ring Sensor Display"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RoomEditText" />
+
+    <Spinner
+        android:id="@+id/InnerSpinner"
+        android:layout_width="230dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InnerRingTextView" />
+
+    <TextView
+        android:id="@+id/OuterRingTextView"
+        android:layout_width="230dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:text="Outer Ring Sensor Display"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MiddleSpinner" />
+
+    <Button
+        android:id="@+id/SaveButton"
+        android:layout_width="222dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#30336b"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RoomEditText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
