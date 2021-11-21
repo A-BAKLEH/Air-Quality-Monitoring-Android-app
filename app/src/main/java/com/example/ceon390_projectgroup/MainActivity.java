@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
         mainGauge.addThirdRange(range3);
 
         sensorReturn("MQ8 Sensor", "MQ2 Sensor", "MQ4 Sensor"); //Default values
+        databaseInsert();
+
+
 
         navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -124,6 +127,34 @@ public class MainActivity extends AppCompatActivity {
                 mainGauge.setValue(Double.parseDouble(value1)); //Set value outer ring
                 mainGauge.setSecondValue(Double.parseDouble(value2)); //Set value middle ring
                 mainGauge.setThirdValue(Double.parseDouble(value3)); //Set value inner ring
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, "Failed to get data. Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void databaseInsert() {
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                double value1 =  Double.parseDouble(String.valueOf(snapshot.child("CO2 CCS811 Sensor").getValue()));
+                double value2 = Double.parseDouble(String.valueOf(snapshot.child("MQ135 Sensor").getValue()));
+                double value3 = Double.parseDouble(String.valueOf(snapshot.child("MQ2 Sensor").getValue()));
+                double value4 = Double.parseDouble(String.valueOf(snapshot.child("MQ4 Sensor").getValue()));
+                double value5 = Double.parseDouble(String.valueOf(snapshot.child("MQ8 Sensor").getValue()));
+                double value6 = Double.parseDouble(String.valueOf(snapshot.child("MQ9 Sensor").getValue()));
+                double value7 = Double.parseDouble(String.valueOf(snapshot.child("TVOC CCS811 Sensor").getValue()));
+                if(value1 != 0) { databaseHelper.insertSensors(new Sensors("CO2", snapshot.child("CO2 CCS811 Sensor").getValue().toString())); }
+                if(value2 != 0) { databaseHelper.insertSensors(new Sensors("Ammonia", snapshot.child("MQ135 Sensor").getValue().toString())); }
+                if(value3 != 0){ databaseHelper.insertSensors(new Sensors("Smoke",snapshot.child("MQ2 Sensor").getValue().toString())); }
+                if(value4 != 0){ databaseHelper.insertSensors(new Sensors("Methane",snapshot.child("MQ4 Sensor").getValue().toString())); }
+                if(value5 != 0){ databaseHelper.insertSensors(new Sensors("Hydrogen",snapshot.child("MQ8 Sensor").getValue().toString())); }
+                if(value6 != 0){ databaseHelper.insertSensors(new Sensors("CO",snapshot.child("MQ9 Sensor").getValue().toString())); }
+                if(value7 != 0){ databaseHelper.insertSensors(new Sensors("TVOC",snapshot.child("TVOC CCS811 Sensor").getValue().toString())); }
             }
 
             @Override

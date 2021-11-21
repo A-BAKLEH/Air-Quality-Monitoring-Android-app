@@ -10,12 +10,14 @@
 
     <ListView
         android:id="@+id/databaseList"
-        android:layout_width="411dp"
-        android:layout_height="624dp"
+        android:layout_width="401dp"
+        android:layout_height="652dp"
         app:layout_constraintBottom_toTopOf="@+id/navBar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" >
+        app:layout_constraintTop_toBottomOf="@+id/relative_toolbar"
+        app:layout_constraintVertical_bias="0.0">
 
     </ListView>
 
@@ -24,8 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#212121"
-        android:visibility="gone"
         android:theme="@style/Theme.CEON390ProjectGroup.AppBarOverlay"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -36,18 +38,18 @@
             android:layout_height="?attr/actionBarSize"
             android:background="#f4b350"
             app:popupTheme="@style/Theme.CEON390ProjectGroup.PopupOverlay"
-            app:title="Database"
-            />
+            app:title="Database" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
     <RelativeLayout
         android:id="@+id/relative_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="#f4b350"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="#f4b350">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,9 +58,10 @@
             android:text="Database"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </RelativeLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navBar"
         android:layout_width="416dp"
@@ -68,7 +71,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_nav" >
+        app:menu="@menu/menu_nav">
 
         <TextView
             android:id="@android:id/text1"

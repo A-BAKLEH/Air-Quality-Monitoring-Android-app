@@ -37,8 +37,6 @@ public class DatabaseActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseHelper = new DatabaseHelper(this);
 
-        databaseHelper.insertSensors(new Sensors(1,"CO2 Sensor", "99.345","5:33 pm"));
-        List<Sensors> sensorsDatabase = databaseHelper.getAllValues();
 
         navBar  = findViewById(R.id.navBar);
         navBar.setSelectedItemId(R.id.database_nav);
@@ -71,12 +69,12 @@ protected void setDatabaseList(){
     List<Sensors> sensorsDatabase = databaseHelper.getAllValues();
     databaseList = findViewById(R.id.databaseList);
 
+
     ArrayList<String> viewDatabaseList = new ArrayList<>();
-    viewDatabaseList = SensorList;
 
     for(int i=0; i < sensorsDatabase.size(); i++){
-        String display = sensorsDatabase.get(i).getGas()+" "
-                + sensorsDatabase.get(i).getValue().toString()+ " "
+        String display = sensorsDatabase.get(i).getGas()+" PPM: "
+                + sensorsDatabase.get(i).getValue()+ " | "
                 + sensorsDatabase.get(i).getTimestamp();
         viewDatabaseList.add(display);
     }
