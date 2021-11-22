@@ -3,7 +3,6 @@ package com.example.ceon390_projectgroup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -103,37 +102,31 @@ public class SettingsActivity extends AppCompatActivity {
         room.setFilters(FilterArray);
         editButton.setClickable(false);
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String locationName = location.getText().toString();
-                String roomName = room.getText().toString();
-                if(locationName.equals("") || roomName.equals("")){
-                    Toast.makeText(SettingsActivity.this, "Cannot be empty, try again", Toast.LENGTH_SHORT).show();
-                }
-                sharedPreferencesHelper.saveLocation(locationName);
-                sharedPreferencesHelper.saveRoom(roomName);
-                location.setText(sharedPreferencesHelper.getLocation());
-                room.setText(sharedPreferencesHelper.getRoom());
-                //Create firebase data object (gases) to send to Firebase AQM Structure
-                gasData = new FirebaseData(a, cd, cm, h, l, m, t);
-                AQMReference.child("Location: " + sharedPreferencesHelper.getLocation()).child("Room: " + sharedPreferencesHelper.getRoom()).setValue(gasData);
-                saveButton.setClickable(false);
-                saveButton.setAlpha(.5f);
-                editButton.setClickable(true);
-                location.setEnabled(false);
-                room.setEnabled(false);
+        saveButton.setOnClickListener(view -> {
+            String locationName = location.getText().toString();
+            String roomName = room.getText().toString();
+            if(locationName.equals("") || roomName.equals("")){
+                Toast.makeText(SettingsActivity.this, "Cannot be empty, try again", Toast.LENGTH_SHORT).show();
             }
+            sharedPreferencesHelper.saveLocation(locationName);
+            sharedPreferencesHelper.saveRoom(roomName);
+            location.setText(sharedPreferencesHelper.getLocation());
+            room.setText(sharedPreferencesHelper.getRoom());
+            //Create firebase data object (gases) to send to Firebase AQM Structure
+            gasData = new FirebaseData(a, cd, cm, h, l, m, t);
+            AQMReference.child("Location: " + sharedPreferencesHelper.getLocation()).child("Room: " + sharedPreferencesHelper.getRoom()).setValue(gasData);
+            saveButton.setClickable(false);
+            saveButton.setAlpha(.5f);
+            editButton.setClickable(true);
+            location.setEnabled(false);
+            room.setEnabled(false);
         });
 
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveButton.setClickable(true);
-                saveButton.setAlpha(1f);
-                location.setEnabled(true);
-                room.setEnabled(true);
-            }
+        editButton.setOnClickListener(view -> {
+            saveButton.setClickable(true);
+            saveButton.setAlpha(1f);
+            location.setEnabled(true);
+            room.setEnabled(true);
         });
 
         innerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -182,26 +175,23 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.home_nav:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.database_nav:
-                        startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.live_nav:
-                        startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
-                        overridePendingTransition(0,0);
+        navBar.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.home_nav:
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                case R.id.database_nav:
+                    startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                case R.id.live_nav:
+                    startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
+                    overridePendingTransition(0,0);
 
-                        return true;
-                }
-                return false;
+                    return true;
             }
+            return false;
         });
 
     }
@@ -223,13 +213,13 @@ public class SettingsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                cd = dataSnapshot.child("CO2 CCS811 Sensor").getValue().toString();
+                cd = Objects.requireNonNull(dataSnapshot.child("CO2 CCS811 Sensor").getValue()).toString();
                 a = Objects.requireNonNull(dataSnapshot.child("MQ135 Sensor").getValue()).toString();
-                l = dataSnapshot.child("MQ2 Sensor").getValue().toString();
-                m = dataSnapshot.child("MQ4 Sensor").getValue().toString();
-                h = dataSnapshot.child("MQ8 Sensor").getValue().toString();
-                cm = dataSnapshot.child("MQ9 Sensor").getValue().toString();
-                t = dataSnapshot.child("TVOC CCS811 Sensor").getValue().toString();
+                l = Objects.requireNonNull(dataSnapshot.child("MQ2 Sensor").getValue()).toString();
+                m = Objects.requireNonNull(dataSnapshot.child("MQ4 Sensor").getValue()).toString();
+                h = Objects.requireNonNull(dataSnapshot.child("MQ8 Sensor").getValue()).toString();
+                cm = Objects.requireNonNull(dataSnapshot.child("MQ9 Sensor").getValue()).toString();
+                t = Objects.requireNonNull(dataSnapshot.child("TVOC CCS811 Sensor").getValue()).toString();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

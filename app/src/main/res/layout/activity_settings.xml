@@ -8,6 +8,18 @@
     tools:context=".DatabaseActivity">
 
 
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#005b96"
+        android:text="@string/EditButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.321"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RoomEditText" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout3"
         android:layout_width="match_parent"
@@ -49,7 +61,7 @@
         android:minHeight="48dp"
         android:text="@string/LocationEditText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout3" />
 
@@ -57,14 +69,14 @@
         android:id="@+id/RoomEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="@string/RoomHint"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="@string/RoomEditText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LocationEditText" />
 
@@ -74,7 +86,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="44dp"
         android:gravity="center_vertical"
-        android:text="Middle Ring Sensor Display"
+        android:text="@string/MiddleSpinnerText"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.441"
@@ -90,7 +102,7 @@
         app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MiddleRingTextView"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Spinner
         android:id="@+id/OuterSpinner"
@@ -100,7 +112,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OuterRingTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/OuterRingTextView"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/InnerRingTextView"
@@ -108,7 +121,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="108dp"
         android:gravity="center_vertical"
-        android:text="Inner Ring Sensor Display"
+        android:text="@string/InnerSpinerText"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.441"
@@ -123,7 +136,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InnerRingTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/InnerRingTextView"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/OuterRingTextView"
@@ -131,7 +145,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
         android:gravity="center_vertical"
-        android:text="Outer Ring Sensor Display"
+        android:text="@string/OuterSpinnerText"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.441"
@@ -140,13 +154,13 @@
 
     <Button
         android:id="@+id/SaveButton"
-        android:layout_width="222dp"
-        android:layout_height="48dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="#005b96"
-        android:text="Save"
+        android:text="@string/SaveButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintHorizontal_bias="0.675"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RoomEditText" />
 

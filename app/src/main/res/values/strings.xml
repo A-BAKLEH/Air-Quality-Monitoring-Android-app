@@ -25,4 +25,9 @@
     <string name="MiddleSpinnerGas">Middle Spinner Gas</string>
     <string name="OuterSpinner">Outer Spinner Value</string>
     <string name="OuterSpinnerGas">Outer Spinner Gas</string>
+    <string name="EditButton">Edit</string>
+    <string name="SaveButton">Save</string>
+    <string name="InnerSpinerText">Inner Ring Sensor Display</string>
+    <string name="MiddleSpinnerText">Middle Ring Sensor Display</string>
+    <string name="OuterSpinnerText">Outer Ring Sensor Display</string>
 </resources>
