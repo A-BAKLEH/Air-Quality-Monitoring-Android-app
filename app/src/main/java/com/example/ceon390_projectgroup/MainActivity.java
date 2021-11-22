@@ -1,14 +1,11 @@
 package com.example.ceon390_projectgroup;
 
-import static com.example.ceon390_projectgroup.SettingsActivity.SENSOR;
-import static com.example.ceon390_projectgroup.SettingsActivity.sensors;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,14 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ekn.gruzer.gaugelibrary.MultiGauge;
 import com.ekn.gruzer.gaugelibrary.Range;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,12 +30,14 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseReference databaseReference; //For Firebase
     SharedPreferencesHelper sharedPreferencesHelper;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAuth = FirebaseAuth.getInstance();
         DatabaseHelper db = new DatabaseHelper(this);
         sharedPreferencesHelper = new SharedPreferencesHelper(getApplicationContext());
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -109,6 +107,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user == null){
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        }
+    }
+
 
     protected void onResume(){
         super.onResume();

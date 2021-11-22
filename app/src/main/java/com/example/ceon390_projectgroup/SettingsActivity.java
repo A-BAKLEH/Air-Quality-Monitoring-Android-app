@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -36,7 +38,11 @@ public class SettingsActivity extends AppCompatActivity {
     ArrayAdapter arrayAdapter1;
     ArrayAdapter arrayAdapter2;
     ArrayAdapter arrayAdapter3;
+    ImageView logout;
+
     SharedPreferencesHelper sharedPreferencesHelper;
+    FirebaseAuth mAuth;
+
 
     public static String [] sensors = {"MQ135 Sensor", "MQ2 Sensor", "MQ4 Sensor", "MQ8 Sensor", "MQ9 Sensor", "CO2 CCS811 Sensor", "TVOC CCS811 Sensor"};
     //Change sensors to gases
@@ -45,6 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         sharedPreferencesHelper = new SharedPreferencesHelper(getApplicationContext());
+        mAuth = FirebaseAuth.getInstance();
 
         navBar = findViewById(R.id.navBar);
         navBar.setSelectedItemId(R.id.settings_nav);
@@ -54,6 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
         middleRing = findViewById(R.id.MiddleRingTextView);
         outerRing = findViewById(R.id.OuterRingTextView);
         saveButton = findViewById(R.id.SaveButton);
+        logout = findViewById(R.id.logoutImageView);
 
         //inner spinner code
         innerSpinner = findViewById(R.id.InnerSpinner);
@@ -159,6 +167,14 @@ public class SettingsActivity extends AppCompatActivity {
                         return true;
                 }
                 return false;
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
             }
         });
 
