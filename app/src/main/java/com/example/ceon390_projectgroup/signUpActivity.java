@@ -42,7 +42,7 @@ public class signUpActivity extends AppCompatActivity {
     }
 
     private void createUser(){
-        String email = emailEditText.getText().toString();
+        String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString();
 
         if(TextUtils.isEmpty(email)){

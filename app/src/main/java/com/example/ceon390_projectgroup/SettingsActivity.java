@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +44,8 @@ public class SettingsActivity extends AppCompatActivity {
     Button saveButton;
     Button editButton;
 
+    ImageView logoutImage;
+
     ArrayAdapter<String> arrayAdapter1;
     ArrayAdapter<String> arrayAdapter2;
     ArrayAdapter<String> arrayAdapter3;
@@ -49,6 +53,7 @@ public class SettingsActivity extends AppCompatActivity {
     SharedPreferencesHelper sharedPreferencesHelper;
 
     FirebaseDatabase firebaseDatabase; //Firebase object to initialize
+    FirebaseAuth mAuth;
     DatabaseReference databaseReference; //For gas values from Arduino
     DatabaseReference AQMReference; //For the Air Quality Monitoring Structure
     FirebaseData gasData; //Object to send to firebase
@@ -64,6 +69,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
 
         AQMReference = FirebaseDatabase.getInstance().getReference("Air Quality Monitoring");
         Read(); //Find a way to update the firebase structure!!
@@ -76,6 +82,7 @@ public class SettingsActivity extends AppCompatActivity {
         outerRing = findViewById(R.id.OuterRingTextView);
         saveButton = findViewById(R.id.SaveButton);
         editButton = findViewById(R.id.editButton);
+        logoutImage = findViewById(R.id.logoutImageView);
 
         //inner spinner code
         innerSpinner = findViewById(R.id.InnerSpinner);
@@ -192,6 +199,16 @@ public class SettingsActivity extends AppCompatActivity {
                     return true;
             }
             return false;
+        });
+
+        logoutImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                Toast.makeText(SettingsActivity.this,"User logged out",Toast.LENGTH_LONG).show();
+
+            }
         });
 
     }
