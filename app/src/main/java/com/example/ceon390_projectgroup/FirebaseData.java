@@ -2,21 +2,21 @@ package com.example.ceon390_projectgroup;
 
 public class FirebaseData {
 
+    public String Alcohol;
     public String Ammonia;
     public String Carbon_Dioxide;
     public String Carbon_Monoxide;
-    public String Hydrogen;
-    public String LPG;
+    public String Liquefied_Petroleum_Gas;
     public String Methane;
-    public String TVOC;
+    public String Total_Volatile_Organic_Compound;
 
-    public FirebaseData(String a, String cd, String cm, String h, String l, String m, String t){
-        this.Ammonia = a + " ppm";
+    public FirebaseData(String al, String am, String cd, String cm, String lpg, String m, String t){
+        this.Alcohol = al + " ppm";
+        this.Ammonia = am + " ppm";
         this.Carbon_Dioxide = cd + " ppm";
         this.Carbon_Monoxide = cm + " ppm";
-        this.Hydrogen = h + " ppm";
-        this.LPG = l + " ppm";
+        this.Liquefied_Petroleum_Gas = lpg + " ppm";
         this.Methane = m + " ppm";
-        this.TVOC = t + " ppm";
+        this.Total_Volatile_Organic_Compound = t + " ppm";
     }
 }

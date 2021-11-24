@@ -40,29 +40,18 @@ public class LoginActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailLoginEditText);
         passwordEditText = findViewById(R.id.passwordLoginEditText);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginUser();
-            }
+        loginButton.setOnClickListener(view -> loginUser());
+
+        signUpButton.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(),signUpActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.animator.slide_in_right,R.animator.slide_out_left);
         });
 
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),signUpActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.animator.slide_in_right,R.animator.slide_out_left);
-            }
-        });
-
-        forgetPassText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right);
-            }
+        forgetPassText.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right);
         });
     }
 

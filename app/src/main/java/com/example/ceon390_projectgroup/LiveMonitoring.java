@@ -237,19 +237,19 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.child("CO2 CCS811 Sensor").getValue().toString();
+                String value = dataSnapshot.child("Carbon Monoxide").getValue().toString();
                 halfGaugeCO2.setValue(Double.parseDouble(value));
-                String value1 = dataSnapshot.child("MQ135 Sensor").getValue().toString();
+                String value1 = dataSnapshot.child("Ammonia").getValue().toString();
                 halfGaugeMQ135.setValue(Double.parseDouble(value1));
-                String value2 = dataSnapshot.child("MQ2 Sensor").getValue().toString();
+                String value2 = dataSnapshot.child("Liquefied Petroleum Gas").getValue().toString();
                 halfGaugeMQ2.setValue(Double.parseDouble(value2));
-                String value3 = dataSnapshot.child("MQ4 Sensor").getValue().toString();
+                String value3 = dataSnapshot.child("Methane").getValue().toString();
                 halfGaugeMQ4.setValue(Double.parseDouble(value3));
-                String value4 = dataSnapshot.child("MQ8 Sensor").getValue().toString();
+                String value4 = dataSnapshot.child("Alcohol").getValue().toString();
                 halfGaugeMQ8.setValue(Double.parseDouble(value4));
-                String value5 = dataSnapshot.child("MQ9 Sensor").getValue().toString();
+                String value5 = dataSnapshot.child("Carbon Monoxide").getValue().toString();
                 halfGaugeMQ9.setValue(Double.parseDouble(value5));
-                String value6 = dataSnapshot.child("TVOC CCS811 Sensor").getValue().toString();
+                String value6 = dataSnapshot.child("Total Volatile Organic Compound").getValue().toString();
                 halfGaugeTVOC.setValue(Double.parseDouble(value6));
             }
             @Override

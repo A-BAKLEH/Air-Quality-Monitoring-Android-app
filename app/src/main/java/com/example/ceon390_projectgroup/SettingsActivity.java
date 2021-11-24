@@ -57,9 +57,9 @@ public class SettingsActivity extends AppCompatActivity {
     DatabaseReference databaseReference; //For gas values from Arduino
     DatabaseReference AQMReference; //For the Air Quality Monitoring Structure
     FirebaseData gasData; //Object to send to firebase
-    String a, cd, cm, h, l, m, t; //Strings to save gas values
+    String alcohol, ammonia, carbon_dioxide, carbon_monoxide, liquefied_petroleum_gas, methane, total_volatile_organic_compound; //Strings to save gas values
 
-    public static String [] sensors = {"MQ135 Sensor", "MQ2 Sensor", "MQ4 Sensor", "MQ8 Sensor", "MQ9 Sensor", "CO2 CCS811 Sensor", "TVOC CCS811 Sensor"};
+    public static String [] sensors = {"Alcohol", "Ammonia", "Carbon Dioxide", "Carbon Monoxide", "Liquefied Petroleum Gas", "Methane", "Total Volatile Organic Compounds"};
     //Change sensors to gases
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +120,7 @@ public class SettingsActivity extends AppCompatActivity {
             location.setText(sharedPreferencesHelper.getLocation());
             room.setText(sharedPreferencesHelper.getRoom());
             //Create firebase data object (gases) to send to Firebase AQM Structure
-            gasData = new FirebaseData(a, cd, cm, h, l, m, t);
+            gasData = new FirebaseData(alcohol, ammonia, carbon_dioxide, carbon_monoxide, liquefied_petroleum_gas, methane, total_volatile_organic_compound);
             AQMReference.child("Location: " + sharedPreferencesHelper.getLocation()).child("Room: " + sharedPreferencesHelper.getRoom()).setValue(gasData);
             saveButton.setClickable(false);
             saveButton.setAlpha(.5f);
@@ -201,14 +201,11 @@ public class SettingsActivity extends AppCompatActivity {
             return false;
         });
 
-        logoutImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                Toast.makeText(SettingsActivity.this,"User logged out",Toast.LENGTH_LONG).show();
+        logoutImage.setOnClickListener(view -> {
+            mAuth.signOut();
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            Toast.makeText(SettingsActivity.this,"User logged out",Toast.LENGTH_LONG).show();
 
-            }
         });
 
     }
@@ -230,13 +227,13 @@ public class SettingsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                cd = Objects.requireNonNull(dataSnapshot.child("CO2 CCS811 Sensor").getValue()).toString();
-                a = Objects.requireNonNull(dataSnapshot.child("MQ135 Sensor").getValue()).toString();
-                l = Objects.requireNonNull(dataSnapshot.child("MQ2 Sensor").getValue()).toString();
-                m = Objects.requireNonNull(dataSnapshot.child("MQ4 Sensor").getValue()).toString();
-                h = Objects.requireNonNull(dataSnapshot.child("MQ8 Sensor").getValue()).toString();
-                cm = Objects.requireNonNull(dataSnapshot.child("MQ9 Sensor").getValue()).toString();
-                t = Objects.requireNonNull(dataSnapshot.child("TVOC CCS811 Sensor").getValue()).toString();
+                carbon_dioxide = Objects.requireNonNull(dataSnapshot.child("Carbon Dioxide").getValue()).toString();
+                ammonia = Objects.requireNonNull(dataSnapshot.child("Ammonia").getValue()).toString();
+                liquefied_petroleum_gas = Objects.requireNonNull(dataSnapshot.child("Liquefied Petroleum Gas").getValue()).toString();
+                methane = Objects.requireNonNull(dataSnapshot.child("Methane").getValue()).toString();
+                alcohol = Objects.requireNonNull(dataSnapshot.child("Alcohol").getValue()).toString();
+                carbon_monoxide = Objects.requireNonNull(dataSnapshot.child("Carbon Monoxide").getValue()).toString();
+                total_volatile_organic_compound = Objects.requireNonNull(dataSnapshot.child("Total Volatile Organic Compound").getValue()).toString();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

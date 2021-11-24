@@ -65,21 +65,21 @@ public class DatabaseActivity extends AppCompatActivity {
 
     }
 
-protected void setDatabaseList(){
-    List<Sensors> sensorsDatabase = databaseHelper.getAllValues();
-    databaseList = findViewById(R.id.databaseList);
+    protected void setDatabaseList(){
+        List<Sensors> sensorsDatabase = databaseHelper.getAllValues();
+        databaseList = findViewById(R.id.databaseList);
 
 
-    ArrayList<String> viewDatabaseList = new ArrayList<>();
+        ArrayList<String> viewDatabaseList = new ArrayList<>();
 
-    for(int i=0; i < sensorsDatabase.size(); i++){
-        String display = sensorsDatabase.get(i).getGas()+" PPM: "
+        for(int i=0; i < sensorsDatabase.size(); i++){
+            String display = sensorsDatabase.get(i).getGas()+" PPM: "
                 + sensorsDatabase.get(i).getValue()+ " | "
                 + sensorsDatabase.get(i).getTimestamp();
-        viewDatabaseList.add(display);
-    }
+            viewDatabaseList.add(display);
+        }
     ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,viewDatabaseList);
     databaseList.setAdapter(arrayAdapter);
-}
+    }
 
 }

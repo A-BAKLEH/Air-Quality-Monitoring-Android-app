@@ -3,9 +3,6 @@ package com.example.ceon390_projectgroup;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +18,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -77,34 +76,31 @@ public class MainActivity extends AppCompatActivity {
         mainGauge.addSecondRange(range2);
         mainGauge.addThirdRange(range3);
 
-        sensorReturn("MQ8 Sensor", "MQ2 Sensor", "MQ4 Sensor"); //Default values
+        sensorReturn("Ammonia", "Alcohol", "Methane"); //Default values
         databaseInsert();
 
 
 
-        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.live_nav:
-                        startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
-                        overridePendingTransition(0, 0);
-                        return true;
+        navBar.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.live_nav:
+                    startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
+                    overridePendingTransition(0, 0);
+                    return true;
 
-                    case R.id.database_nav:
-                        startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
+                case R.id.database_nav:
+                    startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
 
-                    case R.id.settings_nav:
-                        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                        overridePendingTransition(0, 0);
+                case R.id.settings_nav:
+                    startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                    overridePendingTransition(0, 0);
 
-                        return true;
-                }
-
-                return false;
+                    return true;
             }
+
+            return false;
         });
     }
 
@@ -127,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String value1 = snapshot.child(sensorName1).getValue().toString(); //Outer Ring
-                String value2 = snapshot.child(sensorName2).getValue().toString(); //Middle Ring
-                String value3 = snapshot.child(sensorName3).getValue().toString(); //Inner Ring
+                String value1 = Objects.requireNonNull(snapshot.child(sensorName1).getValue()).toString(); //Outer Ring
+                String value2 = Objects.requireNonNull(snapshot.child(sensorName2).getValue()).toString(); //Middle Ring
+                String value3 = Objects.requireNonNull(snapshot.child(sensorName3).getValue()).toString(); //Inner Ring
 
                 mainGauge.setValue(Double.parseDouble(value1)); //Set value outer ring
                 mainGauge.setSecondValue(Double.parseDouble(value2)); //Set value middle ring
@@ -148,20 +144,20 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                double value1 =  Double.parseDouble(String.valueOf(snapshot.child("CO2 CCS811 Sensor").getValue()));
-                double value2 = Double.parseDouble(String.valueOf(snapshot.child("MQ135 Sensor").getValue()));
-                double value3 = Double.parseDouble(String.valueOf(snapshot.child("MQ2 Sensor").getValue()));
-                double value4 = Double.parseDouble(String.valueOf(snapshot.child("MQ4 Sensor").getValue()));
-                double value5 = Double.parseDouble(String.valueOf(snapshot.child("MQ8 Sensor").getValue()));
-                double value6 = Double.parseDouble(String.valueOf(snapshot.child("MQ9 Sensor").getValue()));
-                double value7 = Double.parseDouble(String.valueOf(snapshot.child("TVOC CCS811 Sensor").getValue()));
-                if(value1 != 0) { databaseHelper.insertSensors(new Sensors("CO2", snapshot.child("CO2 CCS811 Sensor").getValue().toString())); }
-                if(value2 != 0) { databaseHelper.insertSensors(new Sensors("Ammonia", snapshot.child("MQ135 Sensor").getValue().toString())); }
-                if(value3 != 0){ databaseHelper.insertSensors(new Sensors("Smoke",snapshot.child("MQ2 Sensor").getValue().toString())); }
-                if(value4 != 0){ databaseHelper.insertSensors(new Sensors("Methane",snapshot.child("MQ4 Sensor").getValue().toString())); }
-                if(value5 != 0){ databaseHelper.insertSensors(new Sensors("Hydrogen",snapshot.child("MQ8 Sensor").getValue().toString())); }
-                if(value6 != 0){ databaseHelper.insertSensors(new Sensors("CO",snapshot.child("MQ9 Sensor").getValue().toString())); }
-                if(value7 != 0){ databaseHelper.insertSensors(new Sensors("TVOC",snapshot.child("TVOC CCS811 Sensor").getValue().toString())); }
+                double value1 =  Double.parseDouble(String.valueOf(snapshot.child("Carbon Dioxide").getValue()));
+                double value2 = Double.parseDouble(String.valueOf(snapshot.child("Ammonia").getValue()));
+                double value3 = Double.parseDouble(String.valueOf(snapshot.child("Liquefied Petroleum Gas").getValue()));
+                double value4 = Double.parseDouble(String.valueOf(snapshot.child("Methane").getValue()));
+                double value5 = Double.parseDouble(String.valueOf(snapshot.child("Alcohol").getValue()));
+                double value6 = Double.parseDouble(String.valueOf(snapshot.child("Carbon Monoxide").getValue()));
+                double value7 = Double.parseDouble(String.valueOf(snapshot.child("Total Volatile Organic Compound").getValue()));
+                if(value1 != 0) { databaseHelper.insertSensors(new Sensors("Carbon Dioxide", Objects.requireNonNull(snapshot.child("Carbon Dioxide").getValue()).toString())); }
+                if(value2 != 0) { databaseHelper.insertSensors(new Sensors("Ammonia", Objects.requireNonNull(snapshot.child("Ammonia").getValue()).toString())); }
+                if(value3 != 0){ databaseHelper.insertSensors(new Sensors("LPG", Objects.requireNonNull(snapshot.child("Liquefied Petroleum Gas").getValue()).toString())); }
+                if(value4 != 0){ databaseHelper.insertSensors(new Sensors("Methane", Objects.requireNonNull(snapshot.child("Methane").getValue()).toString())); }
+                if(value5 != 0){ databaseHelper.insertSensors(new Sensors("Alcohol", Objects.requireNonNull(snapshot.child("Alcohol").getValue()).toString())); }
+                if(value6 != 0){ databaseHelper.insertSensors(new Sensors("Carbon Monoxide", Objects.requireNonNull(snapshot.child("Carbon Monoxide").getValue()).toString())); }
+                if(value7 != 0){ databaseHelper.insertSensors(new Sensors("TVOC", Objects.requireNonNull(snapshot.child("Total Volatile Organic Compound").getValue()).toString())); }
             }
 
             @Override
