@@ -14,7 +14,7 @@ public class SharedPreferencesHelper {
     }
 
     public String getLocation(){
-        return this.sharedPreferences.getString(this.context.getString(R.string.LocationEditText), null);
+        return this.sharedPreferences.getString(this.context.getString(R.string.LocationEditText), "");
     }
 
     public void saveLocation(String location){
@@ -24,7 +24,7 @@ public class SharedPreferencesHelper {
     }
 
     public String getRoom(){
-        return this.sharedPreferences.getString(this.context.getString(R.string.RoomEditText), null);
+        return this.sharedPreferences.getString(this.context.getString(R.string.RoomEditText), "");
     }
 
     public void saveRoom(String room){
