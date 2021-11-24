@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#f4b350">
+        android:background="#F9D8A5">
 
         <TextView
             android:layout_width="wrap_content"

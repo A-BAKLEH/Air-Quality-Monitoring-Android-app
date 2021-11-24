@@ -34,7 +34,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#f4b350"
+            android:background="#F9D8A5"
             app:title="Settings" />
 
     </com.google.android.material.appbar.AppBarLayout>

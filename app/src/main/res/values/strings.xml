@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CEON390-ProjectGroup</string>
+    <string name="app_name">AQM</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -30,4 +30,5 @@
     <string name="InnerSpinerText">Inner Ring Sensor Display</string>
     <string name="MiddleSpinnerText">Middle Ring Sensor Display</string>
     <string name="OuterSpinnerText">Outer Ring Sensor Display</string>
+    <string name="LoginEmailText">Email Address</string>
 </resources>
