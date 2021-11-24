@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferencesHelper sharedPreferencesHelper;
     FirebaseAuth mAuth;
 
-    TextView tvOuterGauge, tvMiddleGauge, tvInnerGauge;
+    TextView tvOuterGauge, tvMiddleGauge, tvInnerGauge, locationName, roomName;
     LinearLayout linearOuter, linearMiddle, linearInner;
 
     @Override
@@ -96,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferencesHelper = new SharedPreferencesHelper(getApplicationContext());
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        locationName = findViewById(R.id.locationName);
+        roomName = findViewById(R.id.roomName);
+
         tvOuterGauge = findViewById(R.id.tv_outer_gauge);
         tvMiddleGauge = findViewById(R.id.tv_middle_gauge);
         tvInnerGauge = findViewById(R.id.tv_inner_gauge);
@@ -103,6 +106,9 @@ public class MainActivity extends AppCompatActivity {
         linearOuter = findViewById(R.id.linear_outer);
         linearMiddle = findViewById(R.id.linear_middle);
         linearInner = findViewById(R.id.linear_inner);
+
+        locationName.setText(sharedPreferencesHelper.getLocation());
+        roomName.setText(sharedPreferencesHelper.getRoom());
 
         String sensors = " ";
         System.out.print(sensors + db.getAllValues());

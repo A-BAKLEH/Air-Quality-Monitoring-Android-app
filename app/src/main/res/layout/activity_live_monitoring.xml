@@ -116,8 +116,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="20dp"
                         android:paddingBottom="10dp"
-                        android:src="@drawable/ic_baseline_info_24"
-                        app:tint="#30336b" />
+                        android:src="@drawable/ic_baseline_info_24" />
 
                 </RelativeLayout>
 
@@ -167,7 +166,7 @@
                         android:layout_marginEnd="20dp"
                         android:paddingBottom="10dp"
                         android:src="@drawable/ic_baseline_info_24"
-                        app:tint="#30336b" />
+                         />
 
                 </RelativeLayout>
 
@@ -216,8 +215,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="20dp"
                         android:paddingBottom="10dp"
-                        android:src="@drawable/ic_baseline_info_24"
-                        app:tint="#30336b" />
+                        android:src="@drawable/ic_baseline_info_24" />
 
                 </RelativeLayout>
 
@@ -266,8 +264,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="20dp"
                         android:paddingBottom="10dp"
-                        android:src="@drawable/ic_baseline_info_24"
-                        app:tint="#30336b" />
+                        android:src="@drawable/ic_baseline_info_24" />
 
                 </RelativeLayout>
 
@@ -316,8 +313,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="20dp"
                         android:paddingBottom="10dp"
-                        android:src="@drawable/ic_baseline_info_24"
-                        app:tint="#30336b" />
+                        android:src="@drawable/ic_baseline_info_24" />
 
                 </RelativeLayout>
 
@@ -366,8 +362,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="20dp"
                         android:paddingBottom="10dp"
-                        android:src="@drawable/ic_baseline_info_24"
-                        app:tint="#30336b" />
+                        android:src="@drawable/ic_baseline_info_24" />
 
                 </RelativeLayout>
 
@@ -417,8 +412,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="20dp"
                         android:paddingBottom="10dp"
-                        android:src="@drawable/ic_baseline_info_24"
-                        app:tint="#30336b" />
+                        android:src="@drawable/ic_baseline_info_24" />
 
                 </RelativeLayout>
 

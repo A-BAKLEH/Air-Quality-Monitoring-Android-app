@@ -154,6 +154,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/btn_bg"
+            android:backgroundTint="#005b96"
             android:text="Done"
             android:textColor="@color/white"
             android:textStyle="bold" />
