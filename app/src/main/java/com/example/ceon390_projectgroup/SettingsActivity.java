@@ -59,7 +59,7 @@ public class SettingsActivity extends AppCompatActivity {
     FirebaseData gasData; //Object to send to firebase
     String alcohol, ammonia, carbon_dioxide, carbon_monoxide, liquefied_petroleum_gas, methane, total_volatile_organic_compound; //Strings to save gas values
 
-    public static String [] gases = {"Alcohol", "Ammonia", "Carbon Dioxide", "Carbon Monoxide", "Liquefied Petroleum Gas", "Methane", "Total Volatile Organic Compounds"};
+    public static String [] gases = {"Alcohol", "Ammonia", "Carbon Dioxide", "Carbon Monoxide", "Liquefied Petroleum Gas", "Methane", "Total Volatile Organic Compound"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
