@@ -3,6 +3,9 @@ package com.example.ceon390_projectgroup;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferencesHelper sharedPreferencesHelper;
     FirebaseAuth mAuth;
 
+    TextView tvOuterGauge, tvMiddleGauge, tvInnerGauge;
+    LinearLayout linearOuter, linearMiddle, linearInner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferencesHelper = new SharedPreferencesHelper(getApplicationContext());
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        tvOuterGauge = findViewById(R.id.tv_outer_gauge);
+        tvMiddleGauge = findViewById(R.id.tv_middle_gauge);
+        tvInnerGauge = findViewById(R.id.tv_inner_gauge);
+
+        linearOuter = findViewById(R.id.linear_outer);
+        linearMiddle = findViewById(R.id.linear_middle);
+        linearInner = findViewById(R.id.linear_inner);
+
         String sensors = " ";
         System.out.print(sensors + db.getAllValues());
         System.out.println();
@@ -49,15 +63,15 @@ public class MainActivity extends AppCompatActivity {
         Range range2 = new Range();
         Range range3 = new Range();
 
-        range1.setColor(Color.parseColor("#d91e18"));
+        range1.setColor(Color.parseColor("#98a5e3"));
         range1.setFrom(0);
         range1.setTo(5000);
 
-        range2.setColor(Color.parseColor("#f89406"));
+        range2.setColor(Color.parseColor("#8a7fb5"));
         range2.setFrom(0);
         range2.setTo(500);
 
-        range3.setColor(Color.parseColor("#f5e51b"));
+        range3.setColor(Color.parseColor("#d18ca0"));
         range3.setFrom(0);
         range3.setTo(500);
 
@@ -78,8 +92,6 @@ public class MainActivity extends AppCompatActivity {
 
         sensorReturn("Ammonia", "Alcohol", "Methane"); //Default values
         databaseInsert();
-
-
 
         navBar.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -112,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     protected void onResume(){
         super.onResume();
         sensorReturn(sharedPreferencesHelper.getOuterSpinnerGas(), sharedPreferencesHelper.getMiddleSpinnerGas(), sharedPreferencesHelper.getInnerSpinnerGas());
@@ -130,6 +141,15 @@ public class MainActivity extends AppCompatActivity {
                 mainGauge.setValue(Double.parseDouble(value1)); //Set value outer ring
                 mainGauge.setSecondValue(Double.parseDouble(value2)); //Set value middle ring
                 mainGauge.setThirdValue(Double.parseDouble(value3)); //Set value inner ring
+                tvOuterGauge.setText(sensorName1 + ": " + value1 + " ppm");
+                tvMiddleGauge.setText(sensorName2 + ": " + value2 + " ppm");
+                tvInnerGauge.setText(sensorName3 + ": " + value3 + " ppm");
+
+                linearOuter.setVisibility(View.VISIBLE);
+
+                linearMiddle.setVisibility(View.VISIBLE);
+
+                linearInner.setVisibility(View.VISIBLE);
             }
 
             @Override

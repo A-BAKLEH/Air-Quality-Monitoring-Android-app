@@ -23,7 +23,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#f4b350"
+        android:background="#f7c67b"
         android:visibility="gone"
         android:theme="@style/Theme.CEON390ProjectGroup.AppBarOverlay"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#F9D8A5">
+        android:background="#f7c67b">
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,7 +56,6 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
-
     </RelativeLayout>
 
     <ScrollView

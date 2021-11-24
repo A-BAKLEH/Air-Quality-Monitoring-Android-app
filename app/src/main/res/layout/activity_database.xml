@@ -7,7 +7,6 @@
     android:background="@color/white"
     tools:context=".DatabaseActivity">
 
-
     <ListView
         android:id="@+id/databaseList"
         android:layout_width="401dp"
@@ -36,7 +35,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#f4b350"
+            android:background="#f7c67b"
             app:popupTheme="@style/Theme.CEON390ProjectGroup.PopupOverlay"
             app:title="Database" />
 

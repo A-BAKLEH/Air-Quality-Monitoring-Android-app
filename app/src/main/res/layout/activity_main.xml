@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#F9D8A5">
+        android:background="#f7c67b">
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,9 +44,7 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"/>
-
     </RelativeLayout>
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navBar"
@@ -80,6 +78,94 @@
         app:layout_constraintTop_toBottomOf="@+id/relative_toolbar"
         app:layout_constraintVertical_bias="0.466"
         app:srcCompat="@drawable/logo_no_text" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="36dp"
+        app:layout_constraintEnd_toEndOf="@+id/relative_toolbar"
+        app:layout_constraintStart_toStartOf="@+id/relative_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/multiGauge">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linear_outer"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@color/outer"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/tv_outer_gauge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Outer Gauge"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linear_middle"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@color/middle"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/tv_middle_gauge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Middle Gauge"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:id="@+id/linear_inner"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@color/inner"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/tv_inner_gauge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inner Gauge"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
