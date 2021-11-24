@@ -58,7 +58,7 @@ public class SharedPreferencesHelper {
     }
 
     public String getMiddleSpinnerGas(){
-        return this.sharedPreferences.getString(this.context.getString(R.string.MiddleSpinnerGas),"Ammonia");
+        return this.sharedPreferences.getString(this.context.getString(R.string.MiddleSpinnerGas),"Alcohol");
     }
 
     public void saveMiddleSpinnerSelection(int sv){
@@ -78,7 +78,7 @@ public class SharedPreferencesHelper {
     }
 
     public String getOuterSpinnerGas(){
-        return this.sharedPreferences.getString(this.context.getString(R.string.OuterSpinnerGas),"Methane");
+        return this.sharedPreferences.getString(this.context.getString(R.string.OuterSpinnerGas),"Alcohol");
     }
 
     public void saveOuterSpinnerSelection(int sv){

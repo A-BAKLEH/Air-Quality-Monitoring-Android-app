@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,10 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Objects;
 
 public class LiveMonitoring extends AppCompatActivity implements View.OnClickListener {
-
-    /*FullGauge fullGaugeCO2;
-    FullGauge fullGaugeMQ135;
-    FullGauge fullGaugeMQ2;*/
 
     // HalfGauges for gauge charts
     HalfGauge halfGaugeCO2;
@@ -75,46 +70,23 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
         setListeners();
         initializeGaugesValues();
 
-        /*Range range3 = new Range();
-        range3.setColor(Color.parseColor("#00FF00"));
-        range3.setFrom(0);
-        range3.setTo(500);
-        fullGaugeCO2 = findViewById(R.id.fullGaugeCO2);
-        fullGaugeMQ135 = findViewById(R.id.fullGaugeMQ135);
-        fullGaugeMQ2 = findViewById(R.id.fullGaugeMQ2);
+        navBar.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.home_nav:
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                case R.id.database_nav:
+                    startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                case R.id.settings_nav:
+                    startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                    overridePendingTransition(0, 0);
 
-        fullGaugeCO2.setMinValue(0);
-        fullGaugeCO2.setMaxValue(5000);
-        fullGaugeCO2.addRange(range3);
-
-        fullGaugeMQ135.setMinValue(0);
-        fullGaugeMQ135.setMaxValue(5000);
-        fullGaugeMQ135.addRange(range3);
-
-        fullGaugeMQ2.setMinValue(0);
-        fullGaugeMQ2.setMaxValue(5000);
-        fullGaugeMQ2.addRange(range3);*/
-
-        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.home_nav:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.database_nav:
-                        startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.settings_nav:
-                        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                        overridePendingTransition(0, 0);
-
-                        return true;
-                }
-                return false;
+                    return true;
             }
+            return false;
         });
 
         Read();
@@ -237,19 +209,19 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.child("Carbon Monoxide").getValue().toString();
+                String value = Objects.requireNonNull(dataSnapshot.child("Carbon Monoxide").getValue()).toString();
                 halfGaugeCO2.setValue(Double.parseDouble(value));
-                String value1 = dataSnapshot.child("Ammonia").getValue().toString();
+                String value1 = Objects.requireNonNull(dataSnapshot.child("Ammonia").getValue()).toString();
                 halfGaugeMQ135.setValue(Double.parseDouble(value1));
-                String value2 = dataSnapshot.child("Liquefied Petroleum Gas").getValue().toString();
+                String value2 = Objects.requireNonNull(dataSnapshot.child("Liquefied Petroleum Gas").getValue()).toString();
                 halfGaugeMQ2.setValue(Double.parseDouble(value2));
-                String value3 = dataSnapshot.child("Methane").getValue().toString();
+                String value3 = Objects.requireNonNull(dataSnapshot.child("Methane").getValue()).toString();
                 halfGaugeMQ4.setValue(Double.parseDouble(value3));
-                String value4 = dataSnapshot.child("Alcohol").getValue().toString();
+                String value4 = Objects.requireNonNull(dataSnapshot.child("Alcohol").getValue()).toString();
                 halfGaugeMQ8.setValue(Double.parseDouble(value4));
-                String value5 = dataSnapshot.child("Carbon Monoxide").getValue().toString();
+                String value5 = Objects.requireNonNull(dataSnapshot.child("Carbon Monoxide").getValue()).toString();
                 halfGaugeMQ9.setValue(Double.parseDouble(value5));
-                String value6 = dataSnapshot.child("Total Volatile Organic Compound").getValue().toString();
+                String value6 = Objects.requireNonNull(dataSnapshot.child("Total Volatile Organic Compound").getValue()).toString();
                 halfGaugeTVOC.setValue(Double.parseDouble(value6));
             }
             @Override
@@ -260,7 +232,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    // Overrided method to handle the click on views
+    // Overridden method to handle the click on views
     /**
      * @param view
      * /*app:title="Live Monitoring"

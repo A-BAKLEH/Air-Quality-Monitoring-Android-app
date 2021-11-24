@@ -41,7 +41,56 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupUI();
+        sensorReturn(sharedPreferencesHelper.getOuterSpinnerGas(), sharedPreferencesHelper.getMiddleSpinnerGas(), sharedPreferencesHelper.getInnerSpinnerGas()); //Default values
+        databaseInsert();
+        initNavBar();
+    }
 
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user == null){
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        }
+    }
+
+
+    protected void onResume(){
+        super.onResume();
+        sensorReturn(sharedPreferencesHelper.getOuterSpinnerGas(), sharedPreferencesHelper.getMiddleSpinnerGas(), sharedPreferencesHelper.getInnerSpinnerGas());
+    }
+
+    public void sensorReturn(String sensorName1, String sensorName2 , String sensorName3) {
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String value1 = Objects.requireNonNull(snapshot.child(sensorName1).getValue()).toString(); //Outer Ring
+                String value2 = Objects.requireNonNull(snapshot.child(sensorName2).getValue()).toString(); //Middle Ring
+                String value3 = Objects.requireNonNull(snapshot.child(sensorName3).getValue()).toString(); //Inner Ring
+
+                mainGauge.setValue(Double.parseDouble(value1)); //Set value outer ring
+                mainGauge.setSecondValue(Double.parseDouble(value2)); //Set value middle ring
+                mainGauge.setThirdValue(Double.parseDouble(value3)); //Set value inner ring
+
+                tvOuterGauge.setText(sensorName1 + ": " + value1 + " ppm");
+                tvMiddleGauge.setText(sensorName2 + ": " + value2 + " ppm");
+                tvInnerGauge.setText(sensorName3 + ": " + value3 + " ppm");
+
+                linearOuter.setVisibility(View.VISIBLE);
+                linearMiddle.setVisibility(View.VISIBLE);
+                linearInner.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, "Failed to get data. Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void setupUI(){
         mAuth = FirebaseAuth.getInstance();
         DatabaseHelper db = new DatabaseHelper(this);
         sharedPreferencesHelper = new SharedPreferencesHelper(getApplicationContext());
@@ -89,11 +138,10 @@ public class MainActivity extends AppCompatActivity {
         mainGauge.addRange(range1);
         mainGauge.addSecondRange(range2);
         mainGauge.addThirdRange(range3);
+    }
 
-        sensorReturn("Ammonia", "Alcohol", "Methane"); //Default values
-        databaseInsert();
-
-        navBar.setOnNavigationItemSelectedListener(item -> {
+    public void initNavBar(){
+        navBar.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.live_nav:
                     startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
@@ -115,50 +163,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
     }
-
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user == null){
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-        }
-    }
-
-    protected void onResume(){
-        super.onResume();
-        sensorReturn(sharedPreferencesHelper.getOuterSpinnerGas(), sharedPreferencesHelper.getMiddleSpinnerGas(), sharedPreferencesHelper.getInnerSpinnerGas());
-    }
-
-    public void sensorReturn(String sensorName1, String sensorName2 , String sensorName3) {
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String value1 = Objects.requireNonNull(snapshot.child(sensorName1).getValue()).toString(); //Outer Ring
-                String value2 = Objects.requireNonNull(snapshot.child(sensorName2).getValue()).toString(); //Middle Ring
-                String value3 = Objects.requireNonNull(snapshot.child(sensorName3).getValue()).toString(); //Inner Ring
-
-                mainGauge.setValue(Double.parseDouble(value1)); //Set value outer ring
-                mainGauge.setSecondValue(Double.parseDouble(value2)); //Set value middle ring
-                mainGauge.setThirdValue(Double.parseDouble(value3)); //Set value inner ring
-                tvOuterGauge.setText(sensorName1 + ": " + value1 + " ppm");
-                tvMiddleGauge.setText(sensorName2 + ": " + value2 + " ppm");
-                tvInnerGauge.setText(sensorName3 + ": " + value3 + " ppm");
-
-                linearOuter.setVisibility(View.VISIBLE);
-
-                linearMiddle.setVisibility(View.VISIBLE);
-
-                linearInner.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivity.this, "Failed to get data. Error", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
     public void databaseInsert() {
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
         databaseReference.addValueEventListener(new ValueEventListener() {
