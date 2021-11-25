@@ -27,8 +27,17 @@
     <string name="OuterSpinnerGas">Outer Spinner Gas</string>
     <string name="EditButton">Edit</string>
     <string name="SaveButton">Save</string>
-    <string name="InnerSpinerText">Inner Ring Sensor Display</string>
+    <string name="InnerSpinnerText">Inner Ring Sensor Display</string>
     <string name="MiddleSpinnerText">Middle Ring Sensor Display</string>
     <string name="OuterSpinnerText">Outer Ring Sensor Display</string>
     <string name="LoginEmailText">Email Address</string>
+    <string name="LiveMonitoringTextView">Live Monitoring</string>
+    <string name="CO2TextView">Carbon Dioxide</string>
+    <string name="AmmoniaTextView">Ammonia</string>
+    <string name="LPGTextView">Liquefied Petroleum Gas</string>
+    <string name="MethaneTextView">Methane</string>
+    <string name="AlcoholTextView">Alcohol</string>
+    <string name="CarbonMonoxideTextView">Carbon Monoxide</string>
+    <string name="TvocTextView">Total Volatile Organic Compound</string>
+    <string name="SettingsTextView">Settings</string>
 </resources>

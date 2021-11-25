@@ -51,10 +51,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Settings"
+            android:text="@string/SettingsTextView"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -102,12 +102,12 @@
         android:id="@+id/MiddleRingTextView"
         android:layout_width="230dp"
         android:layout_height="30dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="30dp"
         android:gravity="center_vertical"
         android:text="@string/MiddleSpinnerText"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/InnerSpinner" />
 
@@ -115,9 +115,9 @@
         android:id="@+id/MiddleSpinner"
         android:layout_width="230dp"
         android:layout_height="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MiddleRingTextView"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -126,9 +126,9 @@
         android:id="@+id/OuterSpinner"
         android:layout_width="230dp"
         android:layout_height="20dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/OuterRingTextView"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
@@ -139,10 +139,10 @@
         android:layout_height="30dp"
         android:layout_marginTop="108dp"
         android:gravity="center_vertical"
-        android:text="@string/InnerSpinerText"
+        android:text="@string/InnerSpinnerText"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RoomEditText" />
 
@@ -150,9 +150,9 @@
         android:id="@+id/InnerSpinner"
         android:layout_width="230dp"
         android:layout_height="20dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/InnerRingTextView"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
@@ -166,7 +166,7 @@
         android:text="@string/OuterSpinnerText"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MiddleSpinner" />
 

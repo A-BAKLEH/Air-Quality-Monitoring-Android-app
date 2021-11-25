@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Live Monitoring"
+            android:text="@string/LiveMonitoringTextView"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -88,7 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:text="CO₂ Sensor"
+                    android:text="@string/CO2TextView"
                     android:textColor="#535c68"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -138,14 +138,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearCO2">
 
                 <TextView
+                    android:id="@+id/tvSensorNameMQ135"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvSensorNameMQ135"
                     android:paddingTop="10dp"
-                    android:text="Ammonia Sensor"
-                    android:textSize="24sp"
+                    android:text="@string/AmmoniaTextView"
                     android:textColor="#535c68"
-                    android:textStyle="bold"/>
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -188,14 +188,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearMQ135">
 
                 <TextView
+                    android:id="@+id/tvSensorNameMQ2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvSensorNameMQ2"
                     android:paddingTop="10dp"
-                    android:text="Smoke Sensor"
-                    android:textSize="24sp"
+                    android:text="@string/LPGTextView"
                     android:textColor="#535c68"
-                    android:textStyle="bold"/>
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -237,14 +237,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearMQ2">
 
                 <TextView
+                    android:id="@+id/tvSensorNameMQ4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvSensorNameMQ4"
                     android:paddingTop="10dp"
-                    android:text="Methane Sensor"
-                    android:textSize="24sp"
+                    android:text="@string/MethaneTextView"
                     android:textColor="#535c68"
-                    android:textStyle="bold"/>
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -286,14 +286,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearMQ4">
 
                 <TextView
+                    android:id="@+id/tvSensorNameMQ8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvSensorNameMQ8"
                     android:paddingTop="10dp"
-                    android:text="Hydrogen Sensor"
-                    android:textSize="24sp"
+                    android:text="@string/AlcoholTextView"
                     android:textColor="#535c68"
-                    android:textStyle="bold"/>
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -335,14 +335,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearMQ8">
 
                 <TextView
+                    android:id="@+id/tvSensorNameMQ9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvSensorNameMQ9"
                     android:paddingTop="10dp"
-                    android:text="Carbon monoxide (CO) Sensor"
-                    android:textSize="24sp"
+                    android:text="@string/CarbonMonoxideTextView"
                     android:textColor="#535c68"
-                    android:textStyle="bold"/>
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -385,14 +385,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearMQ9">
 
                 <TextView
+                    android:id="@+id/tvSensorNameTVOC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvSensorNameTVOC"
                     android:paddingTop="10dp"
-                    android:text="TVOC Sensor"
-                    android:textSize="24sp"
+                    android:text="@string/TvocTextView"
                     android:textColor="#535c68"
-                    android:textStyle="bold"/>
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"

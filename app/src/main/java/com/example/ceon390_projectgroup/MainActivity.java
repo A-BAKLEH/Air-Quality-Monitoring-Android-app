@@ -92,16 +92,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void setupUI(){
         mAuth = FirebaseAuth.getInstance();
-        DatabaseHelper db = new DatabaseHelper(this);
+
         sharedPreferencesHelper = new SharedPreferencesHelper(getApplicationContext());
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         locationName = findViewById(R.id.locationName);
         roomName = findViewById(R.id.roomName);
 
+        mainGauge = findViewById(R.id.multiGauge);
         tvOuterGauge = findViewById(R.id.tv_outer_gauge);
         tvMiddleGauge = findViewById(R.id.tv_middle_gauge);
         tvInnerGauge = findViewById(R.id.tv_inner_gauge);
+
+        navBar = findViewById(R.id.navBar);
+        navBar.setSelectedItemId(R.id.home_nav);
 
         linearOuter = findViewById(R.id.linear_outer);
         linearMiddle = findViewById(R.id.linear_middle);
@@ -109,41 +113,115 @@ public class MainActivity extends AppCompatActivity {
 
         locationName.setText(sharedPreferencesHelper.getLocation());
         roomName.setText(sharedPreferencesHelper.getRoom());
+        mainGauge();
+    }
 
-        String sensors = " ";
-        System.out.print(sensors + db.getAllValues());
-        System.out.println();
+    public void mainGauge(){
+        setOuterRing();
+        setMiddleRing();
+        setInnerRing();
+    }
 
-        Range range1 = new Range();
-        Range range2 = new Range();
-        Range range3 = new Range();
+    public void setOuterRing(){
+        Range outer = new Range();
+        outer.setColor(Color.parseColor("#98a5e3"));
+        switch (sharedPreferencesHelper.getOuterSpinnerGas()) {
+            case "Alcohol":
+            case "Liquefied Petroleum Gas":
+            case "Methane":
+                mainGauge.setMinValue(0);
+                mainGauge.setMaxValue(10000);
+                mainGauge.addRange(outer);
+                break;
+            case "Ammonia":
+                mainGauge.setMinValue(0);
+                mainGauge.setMaxValue(300);
+                mainGauge.addRange(outer);
+                break;
+            case "Carbon Dioxide":
+                mainGauge.setMinValue(400);
+                mainGauge.setMaxValue(29206);
+                mainGauge.addRange(outer);
+                break;
+            case "Carbon Monoxide":
+                mainGauge.setMinValue(0);
+                mainGauge.setMaxValue(1000);
+                mainGauge.addRange(outer);
+                break;
+            case "Total Volatile Organic Compound":
+                mainGauge.setMinValue(0);
+                mainGauge.setMaxValue(32768);
+                mainGauge.addRange(outer);
+                break;
+        }
+    }
 
-        range1.setColor(Color.parseColor("#98a5e3"));
-        range1.setFrom(0);
-        range1.setTo(5000);
+    public void setMiddleRing(){
+        Range middle = new Range();
+        middle.setColor(Color.parseColor("#8a7fb5"));
+        switch (sharedPreferencesHelper.getMiddleSpinnerGas()) {
+            case "Alcohol":
+            case "Liquefied Petroleum Gas":
+            case "Methane":
+                mainGauge.setSecondMinValue(0);
+                mainGauge.setSecondMaxValue(10000);
+                mainGauge.addSecondRange(middle);
+                break;
+            case "Ammonia":
+                mainGauge.setSecondMinValue(0);
+                mainGauge.setSecondMaxValue(300);
+                mainGauge.addSecondRange(middle);
+                break;
+            case "Carbon Dioxide":
+                mainGauge.setSecondMinValue(400);
+                mainGauge.setSecondMaxValue(29206);
+                mainGauge.addSecondRange(middle);
+                break;
+            case "Carbon Monoxide":
+                mainGauge.setSecondMinValue(0);
+                mainGauge.setSecondMaxValue(1000);
+                mainGauge.addSecondRange(middle);
+                break;
+            case "Total Volatile Organic Compound":
+                mainGauge.setSecondMinValue(0);
+                mainGauge.setSecondMaxValue(32768);
+                mainGauge.addSecondRange(middle);
+                break;
+        }
+    }
 
-        range2.setColor(Color.parseColor("#8a7fb5"));
-        range2.setFrom(0);
-        range2.setTo(500);
-
-        range3.setColor(Color.parseColor("#d18ca0"));
-        range3.setFrom(0);
-        range3.setTo(500);
-
-        navBar = findViewById(R.id.navBar);
-        navBar.setSelectedItemId(R.id.home_nav);
-        mainGauge = findViewById(R.id.multiGauge);
-
-        mainGauge.setMinValue(0);
-        mainGauge.setMaxValue(5000);
-        mainGauge.setSecondMinValue(0);
-        mainGauge.setSecondMaxValue(50);
-        mainGauge.setThirdMinValue(0);
-        mainGauge.setThirdMaxValue(500);
-
-        mainGauge.addRange(range1);
-        mainGauge.addSecondRange(range2);
-        mainGauge.addThirdRange(range3);
+    public void setInnerRing(){
+        Range inner = new Range();
+        inner.setColor(Color.parseColor("#d18ca0"));
+        switch (sharedPreferencesHelper.getMiddleSpinnerGas()) {
+            case "Alcohol":
+            case "Liquefied Petroleum Gas":
+            case "Methane":
+                mainGauge.setThirdMinValue(0);
+                mainGauge.setThirdMaxValue(10000);
+                mainGauge.addThirdRange(inner);
+                break;
+            case "Ammonia":
+                mainGauge.setThirdMinValue(0);
+                mainGauge.setThirdMaxValue(300);
+                mainGauge.addRange(inner);
+                break;
+            case "Carbon Dioxide":
+                mainGauge.setThirdMinValue(400);
+                mainGauge.setThirdMaxValue(29206);
+                mainGauge.addRange(inner);
+                break;
+            case "Carbon Monoxide":
+                mainGauge.setThirdMinValue(0);
+                mainGauge.setThirdMaxValue(1000);
+                mainGauge.addRange(inner);
+                break;
+            case "Total Volatile Organic Compound":
+                mainGauge.setThirdMinValue(0);
+                mainGauge.setThirdMaxValue(32768);
+                mainGauge.addRange(inner);
+                break;
+        }
     }
 
     public void initNavBar(){
