@@ -34,19 +34,18 @@ public class DatabaseActivity extends AppCompatActivity {
         navBar.setSelectedItemId(R.id.database_nav);
 
         navBar.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.home_nav:
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                case R.id.settings_nav:
-                    startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                case R.id.live_nav:
-                    startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
-                    overridePendingTransition(0,0);
-                    return true;
+            if(item.getItemId() == R.id.live_nav){
+                startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }else if(item.getItemId() == R.id.home_nav){
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }else if(item.getItemId() == R.id.settings_nav){
+                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
             }
             return false;
         });

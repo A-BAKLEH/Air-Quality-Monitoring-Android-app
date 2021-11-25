@@ -71,20 +71,18 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
         initializeGaugesValues();
 
         navBar.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.home_nav:
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                case R.id.database_nav:
-                    startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                case R.id.settings_nav:
-                    startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                    overridePendingTransition(0, 0);
-
-                    return true;
+            if(item.getItemId() == R.id.home_nav){
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }else if(item.getItemId() == R.id.database_nav){
+                startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }else if(item.getItemId() == R.id.settings_nav){
+                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
             }
             return false;
         });
@@ -324,19 +322,19 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 String value = Objects.requireNonNull(dataSnapshot.child("Carbon Monoxide").getValue()).toString();
-                halfGaugeCO2.setValue(Double.parseDouble(value));
+                halfGaugeCO2.setValue(Integer.parseInt(value));
                 String value1 = Objects.requireNonNull(dataSnapshot.child("Ammonia").getValue()).toString();
-                halfGaugeMQ135.setValue(Double.parseDouble(value1));
+                halfGaugeMQ135.setValue(Integer.parseInt(value1));
                 String value2 = Objects.requireNonNull(dataSnapshot.child("Liquefied Petroleum Gas").getValue()).toString();
-                halfGaugeMQ2.setValue(Double.parseDouble(value2));
+                halfGaugeMQ2.setValue(Integer.parseInt(value2));
                 String value3 = Objects.requireNonNull(dataSnapshot.child("Methane").getValue()).toString();
-                halfGaugeMQ4.setValue(Double.parseDouble(value3));
+                halfGaugeMQ4.setValue(Integer.parseInt(value3));
                 String value4 = Objects.requireNonNull(dataSnapshot.child("Alcohol").getValue()).toString();
-                halfGaugeMQ8.setValue(Double.parseDouble(value4));
+                halfGaugeMQ8.setValue(Integer.parseInt(value4));
                 String value5 = Objects.requireNonNull(dataSnapshot.child("Carbon Monoxide").getValue()).toString();
-                halfGaugeMQ9.setValue(Double.parseDouble(value5));
+                halfGaugeMQ9.setValue(Integer.parseInt(value5));
                 String value6 = Objects.requireNonNull(dataSnapshot.child("Total Volatile Organic Compound").getValue()).toString();
-                halfGaugeTVOC.setValue(Double.parseDouble(value6));
+                halfGaugeTVOC.setValue(Integer.parseInt(value6));
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

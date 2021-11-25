@@ -1,5 +1,6 @@
 package com.example.ceon390_projectgroup;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.ekn.gruzer.gaugelibrary.MultiGauge;
 import com.ekn.gruzer.gaugelibrary.Range;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView navBar;
     MultiGauge mainGauge;
+    NotificationManagerCompat notificationManager;
 
     DatabaseReference databaseReference; //For Firebase
     SharedPreferencesHelper sharedPreferencesHelper;
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tvOuterGauge, tvMiddleGauge, tvInnerGauge, locationName, roomName;
     LinearLayout linearOuter, linearMiddle, linearInner;
+    String alcohol, ammonia, carbon_dioxide, carbon_monoxide, liquefied_petroleum_gas, methane, total_volatile_organic_compound;
+    int al, am, cd, cm, lpg, me, tvoc; //Used for the read function to store gas value for notification
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         sensorReturn(sharedPreferencesHelper.getOuterSpinnerGas(), sharedPreferencesHelper.getMiddleSpinnerGas(), sharedPreferencesHelper.getInnerSpinnerGas()); //Default values
         databaseInsert();
         initNavBar();
+        if(!sharedPreferencesHelper.getLocation().equals("")) {
+            notification();
+        }
     }
 
     protected void onStart() {
@@ -85,6 +94,85 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, "Failed to get data. Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void notification(){
+        Intent intent = new Intent(getApplicationContext(), LiveMonitoring.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        NotificationCompat.Builder warning = new NotificationCompat.Builder(getApplicationContext(), App.CHANNEL_ID)
+                .setContentTitle("WARNING")
+                .setSmallIcon(R.drawable.logo_amq)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent);
+        NotificationCompat.Builder danger = new NotificationCompat.Builder(getApplicationContext(), App.CHANNEL_ID)
+                .setContentTitle("DANGER")
+                .setSmallIcon(R.drawable.logo_amq)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent);
+        notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //TODO:Change range values for warning and danger for each gases
+                carbon_dioxide = Objects.requireNonNull(dataSnapshot.child("Carbon Dioxide").getValue()).toString();
+                cd = Integer.parseInt(carbon_dioxide);
+                if(cd >= 500 && cd <= 1000){
+                    notificationManager.notify(1, warning.setContentText("Carbon Dioxide levels are rising and can affect human health.").build());
+                }else if(cd > 1000){
+                    notificationManager.notify(2, danger.setContentText("Carbon Dioxide levels have reached a toxic limit.").build());
+                }
+                ammonia = Objects.requireNonNull(dataSnapshot.child("Ammonia").getValue()).toString();
+                am = Integer.parseInt(ammonia);
+                if(am >= 500 && am <= 1000){
+                    notificationManager.notify(3, warning.setContentText("Ammonia levels are rising and can affect human health.").build());
+                }else if(am > 1000){
+                    notificationManager.notify(4, danger.setContentText("Ammonia levels have reached a toxic limit.").build());
+                }
+                liquefied_petroleum_gas = Objects.requireNonNull(dataSnapshot.child("Liquefied Petroleum Gas").getValue()).toString();
+                lpg = Integer.parseInt(liquefied_petroleum_gas);
+                if(lpg >= 500 && lpg <= 1000){
+                    notificationManager.notify(5, warning.setContentText("LPG levels are rising and can affect human health.").build());
+                }else if(lpg > 1000){
+                    notificationManager.notify(6, danger.setContentText("LPG levels have reached a toxic limit.").build());
+                }
+                methane = Objects.requireNonNull(dataSnapshot.child("Methane").getValue()).toString();
+                me = Integer.parseInt(methane);
+                if(lpg >= 500 && lpg <= 1000){
+                    notificationManager.notify(7, warning.setContentText("Methane levels are rising and can affect human health.").build());
+                }else if(lpg > 1000){
+                    notificationManager.notify(8, danger.setContentText("Methane levels have reached a toxic limit.").build());
+                }
+                alcohol = Objects.requireNonNull(dataSnapshot.child("Alcohol").getValue()).toString();
+                al = Integer.parseInt(alcohol);
+                if(al >= 500 && al <= 1000){
+                    notificationManager.notify(9, warning.setContentText("Alcohol levels are rising and can affect human health.").build());
+                }else if(al > 1000){
+                    notificationManager.notify(10, danger.setContentText("Alcohol levels have reached a toxic limit.").build());
+                }
+                carbon_monoxide = Objects.requireNonNull(dataSnapshot.child("Carbon Monoxide").getValue()).toString();
+                cm = Integer.parseInt(carbon_monoxide);
+                if(cm >= 500 && cm <= 1000){
+                    notificationManager.notify(11, warning.setContentText("Carbon Monoxide levels are rising and can affect human health.").build());
+                }else if(cm > 1000){
+                    notificationManager.notify(12, danger.setContentText("Carbon Monoxide levels have reached a toxic limit.").build());
+                }
+                total_volatile_organic_compound = Objects.requireNonNull(dataSnapshot.child("Total Volatile Organic Compound").getValue()).toString();
+                tvoc = Integer.parseInt(total_volatile_organic_compound);
+                if(tvoc >= 500 && tvoc <= 1000){
+                    notificationManager.notify(13, warning.setContentText("TVOC levels are rising and can affect human health.").build());
+                }else if(tvoc > 1000){
+                    notificationManager.notify(14, danger.setContentText("TVOC levels have reached a toxic limit.").build());
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
                 Toast.makeText(MainActivity.this, "Failed to get data. Error", Toast.LENGTH_SHORT).show();
             }
         });
@@ -226,27 +314,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void initNavBar(){
         navBar.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.live_nav:
-                    startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-
-                case R.id.database_nav:
-                    startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-
-                case R.id.settings_nav:
-                    startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                    overridePendingTransition(0, 0);
-
-                    return true;
+            if(item.getItemId() == R.id.live_nav){
+                startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }else if(item.getItemId() == R.id.database_nav){
+                startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }else if(item.getItemId() == R.id.settings_nav){
+                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
             }
-
             return false;
         });
     }
+
     public void databaseInsert() {
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -274,5 +358,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 }

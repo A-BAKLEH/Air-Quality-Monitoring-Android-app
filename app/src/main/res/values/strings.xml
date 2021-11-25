@@ -40,4 +40,7 @@
     <string name="CarbonMonoxideTextView">Carbon Monoxide</string>
     <string name="TvocTextView">Total Volatile Organic Compound</string>
     <string name="SettingsTextView">Settings</string>
+    <string name="ChannelName">Alert Level</string>
+    <string name="ChannelDescription">Channel to notify of Warning and Danger alert levels</string>
+
 </resources>

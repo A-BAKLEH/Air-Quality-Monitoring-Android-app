@@ -56,7 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     DatabaseReference databaseReference; //For gas values from Arduino
     DatabaseReference AQMReference; //For the Air Quality Monitoring Structure
-    FirebaseData gasData; //Object to send to firebase
+    FirebaseData gasData; //Object to send to firebase (contains gas values)
     String alcohol, ammonia, carbon_dioxide, carbon_monoxide, liquefied_petroleum_gas, methane, total_volatile_organic_compound; //Strings to save gas values
 
     public static String [] gases = {"Alcohol", "Ammonia", "Carbon Dioxide", "Carbon Monoxide", "Liquefied Petroleum Gas", "Methane", "Total Volatile Organic Compound"};
@@ -67,8 +67,8 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         setupUI();
         initSpinner();
-        Read();
         initButtons();
+        Read();
     }
 
     @Override
@@ -103,6 +103,10 @@ public class SettingsActivity extends AppCompatActivity {
                 alcohol = Objects.requireNonNull(dataSnapshot.child("Alcohol").getValue()).toString();
                 carbon_monoxide = Objects.requireNonNull(dataSnapshot.child("Carbon Monoxide").getValue()).toString();
                 total_volatile_organic_compound = Objects.requireNonNull(dataSnapshot.child("Total Volatile Organic Compound").getValue()).toString();
+                if(!sharedPreferencesHelper.getLocation().equals("")) { //VERIFY THIS CODE WHEN SENSOR WORKING
+                    gasData = new FirebaseData(alcohol, ammonia, carbon_dioxide, carbon_monoxide, liquefied_petroleum_gas, methane, total_volatile_organic_compound);
+                    AQMReference.child("Location: " + sharedPreferencesHelper.getLocation()).child("Room: " + sharedPreferencesHelper.getRoom()).setValue(gasData);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -235,20 +239,18 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         navBar.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()){
-                case R.id.home_nav:
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(0,0);
-                    return true;
-                case R.id.database_nav:
-                    startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                case R.id.live_nav:
-                    startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
-                    overridePendingTransition(0,0);
-
-                    return true;
+            if(item.getItemId() == R.id.live_nav){
+                startActivity(new Intent(getApplicationContext(), LiveMonitoring.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }else if(item.getItemId() == R.id.database_nav){
+                startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }else if(item.getItemId() == R.id.home_nav){
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
             }
             return false;
         });
