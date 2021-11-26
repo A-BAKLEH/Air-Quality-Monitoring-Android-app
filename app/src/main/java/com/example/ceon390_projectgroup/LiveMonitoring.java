@@ -321,7 +321,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = Objects.requireNonNull(dataSnapshot.child("Carbon Monoxide").getValue()).toString();
+                String value = Objects.requireNonNull(dataSnapshot.child("Carbon Dioxide").getValue()).toString();
                 halfGaugeCO2.setValue(Integer.parseInt(value));
                 String value1 = Objects.requireNonNull(dataSnapshot.child("Ammonia").getValue()).toString();
                 halfGaugeMQ135.setValue(Integer.parseInt(value1));
