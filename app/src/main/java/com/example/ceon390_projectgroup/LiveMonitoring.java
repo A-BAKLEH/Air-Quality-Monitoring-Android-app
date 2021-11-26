@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,11 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LiveMonitoring extends AppCompatActivity implements View.OnClickListener {
+import java.util.Objects;
 
-    /*FullGauge fullGaugeCO2;
-    FullGauge fullGaugeMQ135;
-    FullGauge fullGaugeMQ2;*/
+public class LiveMonitoring extends AppCompatActivity implements View.OnClickListener {
 
     // HalfGauges for gauge charts
     HalfGauge halfGaugeCO2;
@@ -66,48 +63,28 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_monitoring);
 
+
         databaseReference = FirebaseDatabase.getInstance().getReference();  //get instance for firebase
 
         initViews();
         setListeners();
         initializeGaugesValues();
 
-        /*Range range3 = new Range();
-        range3.setColor(Color.parseColor("#00FF00"));
-        range3.setFrom(0);
-        range3.setTo(500);
-        fullGaugeCO2 = findViewById(R.id.fullGaugeCO2);
-        fullGaugeMQ135 = findViewById(R.id.fullGaugeMQ135);
-        fullGaugeMQ2 = findViewById(R.id.fullGaugeMQ2);
-
-        fullGaugeCO2.setMinValue(0);
-        fullGaugeCO2.setMaxValue(5000);
-        fullGaugeCO2.addRange(range3);
-
-        fullGaugeMQ135.setMinValue(0);
-        fullGaugeMQ135.setMaxValue(5000);
-        fullGaugeMQ135.addRange(range3);
-
-        fullGaugeMQ2.setMinValue(0);
-        fullGaugeMQ2.setMaxValue(5000);
-        fullGaugeMQ2.addRange(range3);*/
-
-        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.home_nav:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.settings_nav:
-                        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-                        overridePendingTransition(0, 0);
-
-                        return true;
-                }
-                return false;
+        navBar.setOnItemSelectedListener(item -> {
+            if(item.getItemId() == R.id.home_nav){
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }else if(item.getItemId() == R.id.database_nav){
+                startActivity(new Intent(getApplicationContext(), DatabaseActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }else if(item.getItemId() == R.id.settings_nav){
+                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
             }
+            return false;
         });
 
         Read();
@@ -164,62 +141,176 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
 
     // This method is used to initialize the half gauges values
     private void initializeGaugesValues() {
-        Range range1 = new Range();
-        range1.setColor(Color.parseColor("#00b20b"));
-        range1.setFrom(0);
-        range1.setTo(4500);
 
-        Range range2 = new Range();
-        range2.setColor(Color.parseColor("#E3E500"));
-        range2.setFrom(4501);
-        range2.setTo(7500);
+        gaugeLPG();
+        gaugeAmmonia();
+        gaugeCarbonDioxide();
+        gaugeCarbonMonoxide();
+        gaugeAlcohol();
+        gaugeMethane();
+        gaugeTVOC();
 
-        Range range3 = new Range();
-        range3.setColor(Color.parseColor("#ce0000"));
-        range3.setFrom(7501);
-        range3.setTo(9999);
+    }
 
-        halfGaugeCO2.addRange(range1);
-        halfGaugeCO2.addRange(range2);
-        halfGaugeCO2.addRange(range3);
-        halfGaugeCO2.setMinValue(0);
-        halfGaugeCO2.setMaxValue(9999);
+    public void gaugeLPG(){
+        Range lpgGreen = new Range();
+        lpgGreen.setColor(Color.parseColor("#badc58"));
+        lpgGreen.setFrom(0);
+        lpgGreen.setTo(1000);
 
-        halfGaugeMQ135.addRange(range1);
-        halfGaugeMQ135.addRange(range2);
-        halfGaugeMQ135.addRange(range3);
-        halfGaugeMQ135.setMinValue(0);
-        halfGaugeMQ135.setMaxValue(9999);
+        Range lpgYellow = new Range();
+        lpgYellow.setColor(Color.parseColor("#f6e58d"));
+        lpgYellow.setFrom(1000);
+        lpgYellow.setTo(2100);
 
-        halfGaugeMQ2.addRange(range1);
-        halfGaugeMQ2.addRange(range2);
-        halfGaugeMQ2.addRange(range3);
+        Range lpgRed = new Range();
+        lpgRed.setColor(Color.parseColor("#ff7979"));
+        lpgRed.setFrom(2100);
+        lpgRed.setTo(10000);
+
+        halfGaugeMQ2.addRange(lpgGreen);
+        halfGaugeMQ2.addRange(lpgYellow);
+        halfGaugeMQ2.addRange(lpgRed);
         halfGaugeMQ2.setMinValue(0);
-        halfGaugeMQ2.setMaxValue(9999);
+        halfGaugeMQ2.setMaxValue(10000);
+    }
 
-        halfGaugeMQ4.addRange(range1);
-        halfGaugeMQ4.addRange(range2);
-        halfGaugeMQ4.addRange(range3);
-        halfGaugeMQ4.setMinValue(0);
-        halfGaugeMQ4.setMaxValue(9999);
+    public void gaugeAmmonia(){
+        Range ammoniaGreen = new Range();
+        ammoniaGreen.setColor(Color.parseColor("#badc58"));
+        ammoniaGreen.setFrom(0);
+        ammoniaGreen.setTo(30);
 
-        halfGaugeMQ8.addRange(range1);
-        halfGaugeMQ8.addRange(range2);
-        halfGaugeMQ8.addRange(range3);
-        halfGaugeMQ8.setMinValue(0);
-        halfGaugeMQ8.setMaxValue(9999);
+        Range ammoniaYellow = new Range();
+        ammoniaYellow.setColor(Color.parseColor("#f6e58d"));
+        ammoniaYellow.setFrom(30);
+        ammoniaYellow.setTo(140);
 
-        halfGaugeMQ9.addRange(range1);
-        halfGaugeMQ9.addRange(range2);
-        halfGaugeMQ9.addRange(range3);
+        Range ammoniaRed = new Range();
+        ammoniaRed.setColor(Color.parseColor("#ff7979"));
+        ammoniaRed.setFrom(140);
+        ammoniaRed.setTo(300);
+
+        halfGaugeMQ135.addRange(ammoniaGreen);
+        halfGaugeMQ135.addRange(ammoniaYellow);
+        halfGaugeMQ135.addRange(ammoniaRed);
+        halfGaugeMQ135.setMinValue(0);
+        halfGaugeMQ135.setMaxValue(300);
+    }
+
+    public void gaugeCarbonDioxide(){
+        Range co2Green = new Range();
+        co2Green.setColor(Color.parseColor("#badc58"));
+        co2Green.setFrom(400);
+        co2Green.setTo(1000);
+
+        Range co2Yellow = new Range();
+        co2Yellow.setColor(Color.parseColor("#f6e58d"));
+        co2Yellow.setFrom(1000);
+        co2Yellow.setTo(29000);
+
+        Range co2Red = new Range();
+        co2Red.setColor(Color.parseColor("#ff7979"));
+        co2Red.setFrom(29000);
+        co2Red.setTo(29206);
+
+        halfGaugeCO2.addRange(co2Green);
+        halfGaugeCO2.addRange(co2Yellow);
+        halfGaugeCO2.addRange(co2Red);
+        halfGaugeCO2.setMinValue(400);
+        halfGaugeCO2.setMaxValue(29206);
+    }
+
+    public void gaugeCarbonMonoxide(){
+        Range coGreen = new Range();
+        coGreen.setColor(Color.parseColor("#badc58"));
+        coGreen.setFrom(0);
+        coGreen.setTo(50);
+
+        Range coYellow = new Range();
+        coYellow.setColor(Color.parseColor("#f6e58d"));
+        coYellow.setFrom(50);
+        coYellow.setTo(400);
+
+        Range coRed = new Range();
+        coRed.setColor(Color.parseColor("#ff7979"));
+        coRed.setFrom(400);
+        coRed.setTo(1000);
+
+        halfGaugeMQ9.addRange(coGreen);
+        halfGaugeMQ9.addRange(coYellow);
+        halfGaugeMQ9.addRange(coRed);
         halfGaugeMQ9.setMinValue(0);
-        halfGaugeMQ9.setMaxValue(9999);
+        halfGaugeMQ9.setMaxValue(1000);
+    }
 
-        halfGaugeTVOC.addRange(range1);
-        halfGaugeTVOC.addRange(range2);
-        halfGaugeTVOC.addRange(range3);
+    public void gaugeAlcohol(){
+        Range alcoholGreen = new Range();
+        alcoholGreen.setColor(Color.parseColor("#badc58"));
+        alcoholGreen.setFrom(0);
+        alcoholGreen.setTo(1000);
+
+        Range alcoholYellow = new Range();
+        alcoholYellow.setColor(Color.parseColor("#f6e58d"));
+        alcoholYellow.setFrom(1000);
+        alcoholYellow.setTo(3300);
+
+        Range alcoholRed = new Range();
+        alcoholRed.setColor(Color.parseColor("#ff7979"));
+        alcoholRed.setFrom(3300);
+        alcoholRed.setTo(10000);
+
+        halfGaugeMQ8.addRange(alcoholGreen);
+        halfGaugeMQ8.addRange(alcoholYellow);
+        halfGaugeMQ8.addRange(alcoholRed);
+        halfGaugeMQ8.setMinValue(0);
+        halfGaugeMQ8.setMaxValue(10000);
+    }
+
+    public void gaugeMethane(){
+        Range methaneGreen = new Range();
+        methaneGreen.setColor(Color.parseColor("#badc58"));
+        methaneGreen.setFrom(0);
+        methaneGreen.setTo(1000);
+
+        Range methaneYellow = new Range();
+        methaneYellow.setColor(Color.parseColor("#f6e58d"));
+        methaneYellow.setFrom(1000);
+        methaneYellow.setTo(5000);
+
+        Range methaneRed = new Range();
+        methaneRed.setColor(Color.parseColor("#ff7979"));
+        methaneRed.setFrom(5000);
+        methaneRed.setTo(10000);
+
+        halfGaugeMQ4.addRange(methaneGreen);
+        halfGaugeMQ4.addRange(methaneYellow);
+        halfGaugeMQ4.addRange(methaneRed);
+        halfGaugeMQ4.setMinValue(0);
+        halfGaugeMQ4.setMaxValue(10000);
+    }
+
+    public void gaugeTVOC(){
+        Range tvocGreen = new Range();
+        tvocGreen.setColor(Color.parseColor("#badc58"));
+        tvocGreen.setFrom(0);
+        tvocGreen.setTo(1);
+
+        Range tvocYellow = new Range();
+        tvocYellow.setColor(Color.parseColor("#f6e58d"));
+        tvocYellow.setFrom(1);
+        tvocYellow.setTo(10);
+
+        Range tvocRed = new Range();
+        tvocRed.setColor(Color.parseColor("#ff7979"));
+        tvocRed.setFrom(10);
+        tvocRed.setTo(32768);
+
+        halfGaugeTVOC.addRange(tvocGreen);
+        halfGaugeTVOC.addRange(tvocYellow);
+        halfGaugeTVOC.addRange(tvocRed);
         halfGaugeTVOC.setMinValue(0);
-        halfGaugeTVOC.setMaxValue(9999);
+        halfGaugeTVOC.setMaxValue(32768);
     }
 
     // This method is to read the Data from Firebase
@@ -230,20 +321,20 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.child("CO2 CCS811 Sensor").getValue().toString();
-                halfGaugeCO2.setValue(Double.parseDouble(value));
-                String value1 = dataSnapshot.child("MQ135 Sensor").getValue().toString();
-                halfGaugeMQ135.setValue(Double.parseDouble(value1));
-                String value2 = dataSnapshot.child("MQ2 Sensor").getValue().toString();
-                halfGaugeMQ2.setValue(Double.parseDouble(value2));
-                String value3 = dataSnapshot.child("MQ4 Sensor").getValue().toString();
-                halfGaugeMQ4.setValue(Double.parseDouble(value3));
-                String value4 = dataSnapshot.child("MQ8 Sensor").getValue().toString();
-                halfGaugeMQ8.setValue(Double.parseDouble(value4));
-                String value5 = dataSnapshot.child("MQ9 Sensor").getValue().toString();
-                halfGaugeMQ9.setValue(Double.parseDouble(value5));
-                String value6 = dataSnapshot.child("TVOC CCS811 Sensor").getValue().toString();
-                halfGaugeTVOC.setValue(Double.parseDouble(value6));
+                String value = Objects.requireNonNull(dataSnapshot.child("Carbon Monoxide").getValue()).toString();
+                halfGaugeCO2.setValue(Integer.parseInt(value));
+                String value1 = Objects.requireNonNull(dataSnapshot.child("Ammonia").getValue()).toString();
+                halfGaugeMQ135.setValue(Integer.parseInt(value1));
+                String value2 = Objects.requireNonNull(dataSnapshot.child("Liquefied Petroleum Gas").getValue()).toString();
+                halfGaugeMQ2.setValue(Integer.parseInt(value2));
+                String value3 = Objects.requireNonNull(dataSnapshot.child("Methane").getValue()).toString();
+                halfGaugeMQ4.setValue(Integer.parseInt(value3));
+                String value4 = Objects.requireNonNull(dataSnapshot.child("Alcohol").getValue()).toString();
+                halfGaugeMQ8.setValue(Integer.parseInt(value4));
+                String value5 = Objects.requireNonNull(dataSnapshot.child("Carbon Monoxide").getValue()).toString();
+                halfGaugeMQ9.setValue(Integer.parseInt(value5));
+                String value6 = Objects.requireNonNull(dataSnapshot.child("Total Volatile Organic Compound").getValue()).toString();
+                halfGaugeTVOC.setValue(Integer.parseInt(value6));
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -253,21 +344,44 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    // Overrided method to handle the click on views
+    // Overridden method to handle the click on views
     /**
      * @param view
+     * /*app:title="Live Monitoring"
      */
     @Override
     public void onClick(View view) {
+        SharedPreferencesHelper sharedPreferencesHelper = new SharedPreferencesHelper(getApplicationContext());
+        Intent intent = new Intent(LiveMonitoring.this, DatabaseActivity.class);
+
         switch (view.getId()) {
+
             case R.id.halfGaugeCO2:
+                sharedPreferencesHelper.saveFilter("Carbon Dioxide");
+                startActivity(intent);
+                break;
             case R.id.halfGaugeMQ135:
+                sharedPreferencesHelper.saveFilter("Ammonia");
+                startActivity(intent);
+                break;
             case R.id.halfGaugeMQ2:
+                sharedPreferencesHelper.saveFilter("LPG");
+                startActivity(intent);
+                break;
             case R.id.halfGaugeMQ4:
+                sharedPreferencesHelper.saveFilter("Methane");
+                startActivity(intent);
+                break;
             case R.id.halfGaugeMQ8:
+                sharedPreferencesHelper.saveFilter("Alcohol");
+                startActivity(intent);
+                break;
             case R.id.halfGaugeMQ9:
+                sharedPreferencesHelper.saveFilter("Carbon Monoxide");
+                startActivity(intent);
+                break;
             case R.id.halfGaugeTVOC:
-                Intent intent = new Intent(LiveMonitoring.this, DatabaseActivity.class);
+                sharedPreferencesHelper.saveFilter("TVOC");
                 startActivity(intent);
                 break;
             case R.id.ivCO2:
@@ -276,7 +390,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
                 String gasDetectionCO2 = tvSensorNameCO2.getText().toString();
                 String dangersCO2 = "CO\u2082 produces many health effects, such as headaches, dizziness, restlessness," +
                         " difficulty breathing, sweating, increased heart rate, and convulsions";
-                String moreInfoCO2 = "shorturl.at/nBO46";
+                String moreInfoCO2 = "https://www.cdc.gov/niosh/npg/npgd0103.html";
                 showDialog(sensorNameCO2, marketNameCO2, gasDetectionCO2, dangersCO2, moreInfoCO2);
                 break;
             case R.id.ivMQ135:
@@ -285,7 +399,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
                 String gasDetectionMQ135 = tvSensorNameMQ135.getText().toString();
                 String dangersMQ135 = "High concentrations of Ammonia in air causes immediate burning " +
                         "of the eyes, nose, throat and respiratory tract and can result in blindness, lung damage or death";
-                String moreInfoMQ135 = "shorturl.at/lstMP";
+                String moreInfoMQ135 = "https://www.ccohs.ca/oshanswers/chemicals/chem_profiles/ammonia.html";
                 showDialog(sensorNameMQ135, marketNameMQ135, gasDetectionMQ135, dangersMQ135, moreInfoMQ135);
                 break;
             case R.id.ivMQ2:
@@ -293,7 +407,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
                 String marketNameMQ2 = "MQ2 Sensor";
                 String gasDetectionMQ2 = tvSensorNameMQ2.getText().toString();
                 String dangersMQ2 = "Inhaling harmful smoke can inflame lungs and airway, causing them to swell and block oxygen";
-                String moreInfoMQ2 = "shorturl.at/uCPRY";
+                String moreInfoMQ2 = "https://www.epa.gov/pm-pollution/how-smoke-fires-can-affect-your-health";
                 showDialog(sensorNameMQ2, marketNameMQ2, gasDetectionMQ2, dangersMQ2, moreInfoMQ2);
                 break;
             case R.id.ivMQ4:

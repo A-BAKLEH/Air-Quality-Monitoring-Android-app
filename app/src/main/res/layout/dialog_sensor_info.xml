@@ -134,6 +134,7 @@
                 android:layout_height="wrap_content"
                 android:text="https://example.com"
                 android:textSize="16sp"
+                android:autoLink="web"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
@@ -153,6 +154,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/btn_bg"
+            android:backgroundTint="#005b96"
             android:text="Done"
             android:textColor="@color/white"
             android:textStyle="bold" />
