@@ -351,15 +351,37 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
      */
     @Override
     public void onClick(View view) {
+        SharedPreferencesHelper sharedPreferencesHelper = new SharedPreferencesHelper(getApplicationContext());
+        Intent intent = new Intent(LiveMonitoring.this, DatabaseActivity.class);
+
         switch (view.getId()) {
+
             case R.id.halfGaugeCO2:
+                sharedPreferencesHelper.saveFilter("Carbon Dioxide");
+                startActivity(intent);
+                break;
             case R.id.halfGaugeMQ135:
+                sharedPreferencesHelper.saveFilter("Ammonia");
+                startActivity(intent);
+                break;
             case R.id.halfGaugeMQ2:
+                sharedPreferencesHelper.saveFilter("LPG");
+                startActivity(intent);
+                break;
             case R.id.halfGaugeMQ4:
+                sharedPreferencesHelper.saveFilter("Methane");
+                startActivity(intent);
+                break;
             case R.id.halfGaugeMQ8:
+                sharedPreferencesHelper.saveFilter("Alcohol");
+                startActivity(intent);
+                break;
             case R.id.halfGaugeMQ9:
+                sharedPreferencesHelper.saveFilter("Carbon Monoxide");
+                startActivity(intent);
+                break;
             case R.id.halfGaugeTVOC:
-                Intent intent = new Intent(LiveMonitoring.this, DatabaseActivity.class);
+                sharedPreferencesHelper.saveFilter("TVOC");
                 startActivity(intent);
                 break;
             case R.id.ivCO2:

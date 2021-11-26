@@ -21,6 +21,7 @@ public class DatabaseActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     ListView databaseList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,7 @@ public class DatabaseActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseHelper = new DatabaseHelper(this);
+
 
 
         navBar  = findViewById(R.id.navBar);
@@ -54,9 +56,16 @@ public class DatabaseActivity extends AppCompatActivity {
     }
 
     protected void setDatabaseList(){
-        List<Sensors> sensorsDatabase = databaseHelper.getAllValues();
-        databaseList = findViewById(R.id.databaseList);
+        SharedPreferencesHelper sharedPreferencesHelper = new SharedPreferencesHelper(this);
+        List<Sensors> sensorsDatabase;
 
+        if(sharedPreferencesHelper.getFilter() == ""){
+            sensorsDatabase = databaseHelper.getAllValues();
+        }
+        else {
+            sensorsDatabase = databaseHelper.getFilterValues(sharedPreferencesHelper.getFilter());
+        }
+        databaseList = findViewById(R.id.databaseList);
 
         ArrayList<String> viewDatabaseList = new ArrayList<>();
 

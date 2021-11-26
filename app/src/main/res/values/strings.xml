@@ -25,6 +25,7 @@
     <string name="MiddleSpinnerGas">Middle Spinner Gas</string>
     <string name="OuterSpinner">Outer Spinner Value</string>
     <string name="OuterSpinnerGas">Outer Spinner Gas</string>
+    <string name="DatabaseFilter">Database Filter</string>
     <string name="EditButton">Edit</string>
     <string name="SaveButton">Save</string>
     <string name="InnerSpinnerText">Inner Ring Sensor Display</string>

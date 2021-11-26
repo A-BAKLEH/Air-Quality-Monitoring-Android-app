@@ -13,6 +13,16 @@ public class SharedPreferencesHelper {
         this.sharedPreferences = context.getSharedPreferences(this.context.getString(R.string.SharedPreferences), Context.MODE_PRIVATE);
     }
 
+    public String getFilter() {
+        return this.sharedPreferences.getString(this.context.getString(R.string.DatabaseFilter), "");
+    }
+
+    public void saveFilter(String filter){
+        SharedPreferences.Editor editor = this.sharedPreferences.edit();
+        editor.putString(this.context.getString(R.string.DatabaseFilter),filter);
+        editor.commit();
+    }
+
     public String getLocation(){
         return this.sharedPreferences.getString(this.context.getString(R.string.LocationEditText), "");
     }

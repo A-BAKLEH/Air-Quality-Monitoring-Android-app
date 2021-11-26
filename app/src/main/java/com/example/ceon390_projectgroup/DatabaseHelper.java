@@ -65,6 +65,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
+    public List<Sensors> getFilterValues(String gas){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.query(Config.TABLE_NAME,null,Config.COLUMN_GAS +"= ?",new String[]{gas},
+                    null, null, null);
+
+            if(cursor != null) {
+                if (cursor.moveToFirst()) {
+                    List<Sensors> sensorsList = new ArrayList<>();
+
+                    do {
+                        @SuppressLint("Range") int ID =
+                                cursor.getInt(cursor.getColumnIndex(Config.COLUMN_KEY_ID));
+                        @SuppressLint("Range") String name =
+                                cursor.getString(cursor.getColumnIndex(Config.COLUMN_GAS));
+                        @SuppressLint("Range") String value =
+                                cursor.getString(cursor.getColumnIndex(Config.COLUMN_VALUE));
+                        @SuppressLint("Range") String timestamp =
+                                cursor.getString(cursor.getColumnIndex(Config.COLUMN_TIMESTAMP));
+
+                        sensorsList.add(new Sensors(ID,name, value, timestamp));
+                    } while (cursor.moveToNext());
+                    return sensorsList;
+                }
+            }
+        } catch (SQLiteException e) {
+            Log.d(TAG, "EXCEPTION: " +e);
+            Toast.makeText(context, "Operation Failed!: " +e, Toast.LENGTH_LONG).show();
+        } finally {
+            if(cursor == null) {
+                cursor.close();
+            }
+            db.close();
+        }
+        return Collections.emptyList();
+
+    }
+
     public List<Sensors> getAllValues() {
 
         SQLiteDatabase db = this.getReadableDatabase();
