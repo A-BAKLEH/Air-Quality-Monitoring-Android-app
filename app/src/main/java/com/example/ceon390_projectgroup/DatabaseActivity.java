@@ -55,6 +55,13 @@ public class DatabaseActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferencesHelper sharedPreferencesHelper = new SharedPreferencesHelper(this);
+        sharedPreferencesHelper.saveFilter("");
+    }
+
     protected void setDatabaseList(){
         SharedPreferencesHelper sharedPreferencesHelper = new SharedPreferencesHelper(this);
         List<Sensors> sensorsDatabase;
