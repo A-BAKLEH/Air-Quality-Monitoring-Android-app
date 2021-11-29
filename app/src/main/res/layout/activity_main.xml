@@ -100,7 +100,7 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_gravity="center"
-                android:background="@color/outer" />
+                android:background="@color/inner" />
 
             <TextView
                 android:id="@+id/tv_outer_gauge"
@@ -152,7 +152,7 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_gravity="center"
-                android:background="@color/inner" />
+                android:background="@color/outer" />
 
             <TextView
                 android:id="@+id/tv_inner_gauge"
