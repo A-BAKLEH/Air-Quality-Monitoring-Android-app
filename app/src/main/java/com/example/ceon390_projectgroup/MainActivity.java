@@ -218,27 +218,27 @@ public class MainActivity extends AppCompatActivity {
             case "Liquefied Petroleum Gas":
             case "Methane":
                 mainGauge.setMinValue(0);
-                mainGauge.setMaxValue(10000);
+                mainGauge.setMaxValue(100);
                 mainGauge.addRange(outer);
                 break;
             case "Ammonia":
                 mainGauge.setMinValue(0);
-                mainGauge.setMaxValue(300);
+                mainGauge.setMaxValue(30);
                 mainGauge.addRange(outer);
                 break;
             case "Carbon Dioxide":
-                mainGauge.setMinValue(400);
-                mainGauge.setMaxValue(29206);
+                mainGauge.setMinValue(0);
+                mainGauge.setMaxValue(2920);
                 mainGauge.addRange(outer);
                 break;
             case "Carbon Monoxide":
                 mainGauge.setMinValue(0);
-                mainGauge.setMaxValue(1000);
+                mainGauge.setMaxValue(100);
                 mainGauge.addRange(outer);
                 break;
             case "Total Volatile Organic Compound":
                 mainGauge.setMinValue(0);
-                mainGauge.setMaxValue(32768);
+                mainGauge.setMaxValue(3276);
                 mainGauge.addRange(outer);
                 break;
         }
@@ -252,27 +252,27 @@ public class MainActivity extends AppCompatActivity {
             case "Liquefied Petroleum Gas":
             case "Methane":
                 mainGauge.setSecondMinValue(0);
-                mainGauge.setSecondMaxValue(10000);
+                mainGauge.setSecondMaxValue(100);
                 mainGauge.addSecondRange(middle);
                 break;
             case "Ammonia":
                 mainGauge.setSecondMinValue(0);
-                mainGauge.setSecondMaxValue(300);
+                mainGauge.setSecondMaxValue(30);
                 mainGauge.addSecondRange(middle);
                 break;
             case "Carbon Dioxide":
-                mainGauge.setSecondMinValue(400);
-                mainGauge.setSecondMaxValue(29206);
+                mainGauge.setSecondMinValue(0);
+                mainGauge.setSecondMaxValue(2920);
                 mainGauge.addSecondRange(middle);
                 break;
             case "Carbon Monoxide":
                 mainGauge.setSecondMinValue(0);
-                mainGauge.setSecondMaxValue(1000);
+                mainGauge.setSecondMaxValue(100);
                 mainGauge.addSecondRange(middle);
                 break;
             case "Total Volatile Organic Compound":
                 mainGauge.setSecondMinValue(0);
-                mainGauge.setSecondMaxValue(32768);
+                mainGauge.setSecondMaxValue(3276);
                 mainGauge.addSecondRange(middle);
                 break;
         }
@@ -281,32 +281,32 @@ public class MainActivity extends AppCompatActivity {
     public void setInnerRing(){
         Range inner = new Range();
         inner.setColor(Color.parseColor("#d18ca0"));
-        switch (sharedPreferencesHelper.getMiddleSpinnerGas()) {
+        switch (sharedPreferencesHelper.getInnerSpinnerGas()) {
             case "Alcohol":
             case "Liquefied Petroleum Gas":
             case "Methane":
                 mainGauge.setThirdMinValue(0);
-                mainGauge.setThirdMaxValue(10000);
+                mainGauge.setThirdMaxValue(100);
                 mainGauge.addThirdRange(inner);
                 break;
             case "Ammonia":
                 mainGauge.setThirdMinValue(0);
-                mainGauge.setThirdMaxValue(300);
+                mainGauge.setThirdMaxValue(30);
                 mainGauge.addRange(inner);
                 break;
             case "Carbon Dioxide":
-                mainGauge.setThirdMinValue(400);
-                mainGauge.setThirdMaxValue(29206);
+                mainGauge.setThirdMinValue(0);
+                mainGauge.setThirdMaxValue(2920);
                 mainGauge.addRange(inner);
                 break;
             case "Carbon Monoxide":
                 mainGauge.setThirdMinValue(0);
-                mainGauge.setThirdMaxValue(1000);
+                mainGauge.setThirdMaxValue(100);
                 mainGauge.addRange(inner);
                 break;
             case "Total Volatile Organic Compound":
                 mainGauge.setThirdMinValue(0);
-                mainGauge.setThirdMaxValue(32768);
+                mainGauge.setThirdMaxValue(3276);
                 mainGauge.addRange(inner);
                 break;
         }
