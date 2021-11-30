@@ -19,6 +19,7 @@ import com.ekn.gruzer.gaugelibrary.Range;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseUserMetadata;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -61,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         if(user == null){
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        } else {
+            FirebaseUserMetadata metadata = mAuth.getCurrentUser().getMetadata();
+            if(sharedPreferencesHelper.getLocation().equals("")){
+                if(metadata.getCreationTimestamp() == metadata.getLastSignInTimestamp()) {
+                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                }
+            }
         }
     }
 

@@ -57,6 +57,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
 
     // Firebase Database Reference
     DatabaseReference databaseReference;
+    SharedPreferencesHelper sharedPreferencesHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,10 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference();  //get instance for firebase
-
+        sharedPreferencesHelper = new SharedPreferencesHelper(getApplicationContext());
+        if(sharedPreferencesHelper.getLocation().equals("")){
+            startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+        }
         initViews();
         setListeners();
         initializeGaugesValues();

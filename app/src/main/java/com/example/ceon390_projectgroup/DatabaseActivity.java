@@ -18,6 +18,7 @@ public class DatabaseActivity extends AppCompatActivity {
 
     BottomNavigationView navBar;
     DatabaseHelper databaseHelper;
+    SharedPreferencesHelper sharedPreferencesHelper;
     DatabaseReference databaseReference;
     ListView databaseList;
 
@@ -29,7 +30,10 @@ public class DatabaseActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseHelper = new DatabaseHelper(this);
-
+        sharedPreferencesHelper = new SharedPreferencesHelper(getApplicationContext());
+        if(sharedPreferencesHelper.getLocation().equals("")){
+            startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+        }
 
 
         navBar  = findViewById(R.id.navBar);
