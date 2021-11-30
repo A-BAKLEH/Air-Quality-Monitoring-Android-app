@@ -54,7 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
     SharedPreferencesHelper sharedPreferencesHelper;
 
     FirebaseDatabase firebaseDatabase; //Firebase object to initialize
-    FirebaseAuth mAuth;
+    FirebaseAuth mAuth; //User authentication
     DatabaseReference databaseReference; //For gas values from Arduino
     DatabaseReference AQMReference; //For the Air Quality Monitoring Structure
     FirebaseData gasData; //Object to send to firebase (contains gas values)
@@ -104,7 +104,7 @@ public class SettingsActivity extends AppCompatActivity {
                 alcohol = Objects.requireNonNull(dataSnapshot.child("Alcohol").getValue()).toString();
                 carbon_monoxide = Objects.requireNonNull(dataSnapshot.child("Carbon Monoxide").getValue()).toString();
                 total_volatile_organic_compound = Objects.requireNonNull(dataSnapshot.child("Total Volatile Organic Compound").getValue()).toString();
-                if(!sharedPreferencesHelper.getLocation().equals("")) { //VERIFY THIS CODE WHEN SENSOR WORKING
+                if(!sharedPreferencesHelper.getLocation().equals("")) {
                     gasData = new FirebaseData(alcohol, ammonia, carbon_dioxide, carbon_monoxide, liquefied_petroleum_gas, methane, total_volatile_organic_compound);
                     AQMReference.child("Location: " + sharedPreferencesHelper.getLocation()).child("Room: " + sharedPreferencesHelper.getRoom()).setValue(gasData);
                 }

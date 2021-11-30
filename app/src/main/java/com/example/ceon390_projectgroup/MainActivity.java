@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     String alcohol, ammonia, carbon_dioxide, carbon_monoxide, liquefied_petroleum_gas, methane, total_volatile_organic_compound;
     int al, am, cd, cm, lpg, me, tvoc; //Used for the read function to store gas value for notification
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 //TODO:Change range values for warning and danger for each gases
                 carbon_dioxide = Objects.requireNonNull(dataSnapshot.child("Carbon Dioxide").getValue()).toString();
                 cd = Integer.parseInt(carbon_dioxide);
-                if(cd >= 500 && cd <= 1000){
+                if(cd >= 400 && cd <= 1000){
                     notificationManager.notify(1, warning.setContentText("Carbon Dioxide levels are rising and can affect human health.").build());
                 }else if(cd > 1000){
                     notificationManager.notify(2, danger.setContentText("Carbon Dioxide levels have reached a toxic limit.").build());
@@ -300,22 +301,22 @@ public class MainActivity extends AppCompatActivity {
             case "Ammonia":
                 mainGauge.setThirdMinValue(0);
                 mainGauge.setThirdMaxValue(30);
-                mainGauge.addRange(inner);
+                mainGauge.addThirdRange(inner);
                 break;
             case "Carbon Dioxide":
                 mainGauge.setThirdMinValue(0);
                 mainGauge.setThirdMaxValue(2920);
-                mainGauge.addRange(inner);
+                mainGauge.addThirdRange(inner);
                 break;
             case "Carbon Monoxide":
                 mainGauge.setThirdMinValue(0);
                 mainGauge.setThirdMaxValue(100);
-                mainGauge.addRange(inner);
+                mainGauge.addThirdRange(inner);
                 break;
             case "Total Volatile Organic Compound":
                 mainGauge.setThirdMinValue(0);
                 mainGauge.setThirdMaxValue(3276);
-                mainGauge.addRange(inner);
+                mainGauge.addThirdRange(inner);
                 break;
         }
     }
