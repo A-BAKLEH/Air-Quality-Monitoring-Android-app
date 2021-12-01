@@ -230,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
                 mainGauge.setMinValue(0);
                 mainGauge.setMaxValue(1000);
                 mainGauge.addRange(outer);
+                break;
             case "Carbon Monoxide":
                 mainGauge.setMinValue(0);
                 mainGauge.setMaxValue(100);
@@ -237,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "Ammonia":
                 mainGauge.setMinValue(0);
-                mainGauge.setMaxValue(30);
+                mainGauge.setMaxValue(300);
                 mainGauge.addRange(outer);
                 break;
             case "Carbon Dioxide":
@@ -260,9 +261,10 @@ public class MainActivity extends AppCompatActivity {
             case "Alcohol":
             case "Liquefied Petroleum Gas":
             case "Methane":
-                mainGauge.setMinValue(0);
-                mainGauge.setMaxValue(1000);
-                mainGauge.addRange(middle);
+                mainGauge.setSecondMinValue(0);
+                mainGauge.setSecondMaxValue(1000);
+                mainGauge.addSecondRange(middle);
+                break;
             case "Carbon Monoxide":
                 mainGauge.setSecondMinValue(0);
                 mainGauge.setSecondMaxValue(100);
@@ -270,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "Ammonia":
                 mainGauge.setSecondMinValue(0);
-                mainGauge.setSecondMaxValue(30);
+                mainGauge.setSecondMaxValue(300);
                 mainGauge.addSecondRange(middle);
                 break;
             case "Carbon Dioxide":
@@ -293,9 +295,10 @@ public class MainActivity extends AppCompatActivity {
             case "Alcohol":
             case "Liquefied Petroleum Gas":
             case "Methane":
-                mainGauge.setMinValue(0);
-                mainGauge.setMaxValue(1000);
-                mainGauge.addRange(inner);
+                mainGauge.setThirdMinValue(0);
+                mainGauge.setThirdMaxValue(1000);
+                mainGauge.addThirdRange(inner);
+                break;
             case "Carbon Monoxide":
                 mainGauge.setThirdMinValue(0);
                 mainGauge.setThirdMaxValue(100);
@@ -303,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "Ammonia":
                 mainGauge.setThirdMinValue(0);
-                mainGauge.setThirdMaxValue(30);
+                mainGauge.setThirdMaxValue(300);
                 mainGauge.addThirdRange(inner);
                 break;
             case "Carbon Dioxide":
@@ -343,7 +346,7 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                double value1 =  Double.parseDouble(String.valueOf(snapshot.child("Carbon Dioxide").getValue()));
+                double value1 = Double.parseDouble(String.valueOf(snapshot.child("Carbon Dioxide").getValue()));
                 double value2 = Double.parseDouble(String.valueOf(snapshot.child("Ammonia").getValue()));
                 double value3 = Double.parseDouble(String.valueOf(snapshot.child("Liquefied Petroleum Gas").getValue()));
                 double value4 = Double.parseDouble(String.valueOf(snapshot.child("Methane").getValue()));
