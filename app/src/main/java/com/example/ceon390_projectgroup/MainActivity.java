@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //TODO:Change range values for warning and danger for each gases
                 carbon_dioxide = Objects.requireNonNull(dataSnapshot.child("Carbon Dioxide").getValue()).toString();
                 cd = Integer.parseInt(carbon_dioxide);
                 if(cd >= 600 && cd <= 1000){
@@ -228,6 +227,9 @@ public class MainActivity extends AppCompatActivity {
             case "Alcohol":
             case "Liquefied Petroleum Gas":
             case "Methane":
+                mainGauge.setMinValue(0);
+                mainGauge.setMaxValue(1000);
+                mainGauge.addRange(outer);
             case "Carbon Monoxide":
                 mainGauge.setMinValue(0);
                 mainGauge.setMaxValue(100);
@@ -258,6 +260,9 @@ public class MainActivity extends AppCompatActivity {
             case "Alcohol":
             case "Liquefied Petroleum Gas":
             case "Methane":
+                mainGauge.setMinValue(0);
+                mainGauge.setMaxValue(1000);
+                mainGauge.addRange(middle);
             case "Carbon Monoxide":
                 mainGauge.setSecondMinValue(0);
                 mainGauge.setSecondMaxValue(100);
@@ -288,6 +293,9 @@ public class MainActivity extends AppCompatActivity {
             case "Alcohol":
             case "Liquefied Petroleum Gas":
             case "Methane":
+                mainGauge.setMinValue(0);
+                mainGauge.setMaxValue(1000);
+                mainGauge.addRange(inner);
             case "Carbon Monoxide":
                 mainGauge.setThirdMinValue(0);
                 mainGauge.setThirdMaxValue(100);

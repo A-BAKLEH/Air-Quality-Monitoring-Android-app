@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 
 public class SharedPreferencesHelper {
 
-    private SharedPreferences sharedPreferences;
-    private Context context;
+    private final SharedPreferences sharedPreferences;
+    private final Context context;
 
     public SharedPreferencesHelper(Context context){
         this.context = context;

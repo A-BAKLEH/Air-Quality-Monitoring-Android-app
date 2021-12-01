@@ -2,13 +2,10 @@ package com.example.ceon390_projectgroup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -76,14 +73,11 @@ public class DatabaseActivity extends AppCompatActivity {
         });
         setDatabaseList();
 
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                refreshButton.setAnimation(refreshAnimation);
-                view.startAnimation(refreshAnimation);
-                sharedPreferencesHelper.saveFilter("");
-                setDatabaseList();
-            }
+        refreshButton.setOnClickListener(view -> {
+            refreshButton.setAnimation(refreshAnimation);
+            view.startAnimation(refreshAnimation);
+            sharedPreferencesHelper.saveFilter("");
+            setDatabaseList();
         });
 
     }
@@ -99,7 +93,7 @@ public class DatabaseActivity extends AppCompatActivity {
         SharedPreferencesHelper sharedPreferencesHelper = new SharedPreferencesHelper(this);
         List<Sensors> sensorsDatabase;
 
-        if(sharedPreferencesHelper.getFilter() == ""){
+        if(sharedPreferencesHelper.getFilter().equals("")){
             sensorsDatabase = databaseHelper.getAllValues();
         }
         else {

@@ -1,7 +1,5 @@
 package com.example.ceon390_projectgroup;
 
-import android.content.Context;
-
 public class Config {
 
     public static final int DATABASE_VERSION = 1;
