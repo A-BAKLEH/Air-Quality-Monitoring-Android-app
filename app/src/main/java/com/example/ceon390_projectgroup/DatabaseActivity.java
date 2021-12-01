@@ -103,18 +103,14 @@ public class DatabaseActivity extends AppCompatActivity {
 
         ArrayList<String> viewDatabaseList = new ArrayList<>();
 
-        for(int i=0; i < sensorsDatabase.size(); i++){
-            String display = sensorsDatabase.get(i).getGas()+" PPM: "
-                + sensorsDatabase.get(i).getValue()+ " | "
-                + sensorsDatabase.get(i).getTimestamp();
-            viewDatabaseList.add(display);
-        }
+            for (int i = 0; i < sensorsDatabase.size(); i++) {
+                String display = sensorsDatabase.get(i).getGas() + " PPM: "
+                        + sensorsDatabase.get(i).getValue() + " | "
+                        + sensorsDatabase.get(i).getTimestamp();
+                viewDatabaseList.add(display);
+            }
+
     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,viewDatabaseList);
     databaseList.setAdapter(arrayAdapter);
     }
-
-    public void setRefreshAnimation(){
-        refreshButton.setAnimation(refreshAnimation);
-    }
-
 }
