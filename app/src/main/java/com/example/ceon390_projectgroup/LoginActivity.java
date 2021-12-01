@@ -1,21 +1,18 @@
 package com.example.ceon390_projectgroup;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -66,17 +63,14 @@ public class LoginActivity extends AppCompatActivity {
             passwordEditText.setError("Password cannot be empty");
             passwordEditText.requestFocus();
         } else {
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(LoginActivity.this,"User Login successfully",Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    } else {
-                        Toast.makeText(LoginActivity.this,"Login Error: " + task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                    }
-
+            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    Toast.makeText(LoginActivity.this,"User Logged In",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                } else {
+                    Toast.makeText(LoginActivity.this,"Login Error: " + Objects.requireNonNull(task.getException()).getMessage(),Toast.LENGTH_LONG).show();
                 }
+
             });
         }
     }

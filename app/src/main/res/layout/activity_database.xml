@@ -9,8 +9,8 @@
 
     <ListView
         android:id="@+id/databaseList"
-        android:layout_width="401dp"
-        android:layout_height="652dp"
+        android:layout_width="411dp"
+        android:layout_height="647dp"
         app:layout_constraintBottom_toTopOf="@+id/navBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -46,11 +46,30 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#f7c67b"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageButton
+            android:id="@+id/refreshButton"
+            android:layout_width="70dp"
+            android:layout_height="52dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="93dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_toEndOf="@+id/textDatabase"
+            android:backgroundTint="#f7c67b"
+            android:contentDescription="TODO"
+            app:srcCompat="@drawable/ic_baseline_refresh_24"
+            tools:ignore="ImageContrastCheck" />
+
         <TextView
+            android:id="@+id/textDatabase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

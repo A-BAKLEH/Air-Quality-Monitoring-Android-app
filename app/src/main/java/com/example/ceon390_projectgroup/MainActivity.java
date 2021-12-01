@@ -19,6 +19,7 @@ import com.ekn.gruzer.gaugelibrary.Range;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseUserMetadata;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     String alcohol, ammonia, carbon_dioxide, carbon_monoxide, liquefied_petroleum_gas, methane, total_volatile_organic_compound;
     int al, am, cd, cm, lpg, me, tvoc; //Used for the read function to store gas value for notification
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,13 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         if(user == null){
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        } else {
+            FirebaseUserMetadata metadata = mAuth.getCurrentUser().getMetadata();
+            if(sharedPreferencesHelper.getLocation().equals("")){
+                if(Objects.requireNonNull(metadata).getCreationTimestamp() == metadata.getLastSignInTimestamp()) {
+                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                }
+            }
         }
     }
 
@@ -82,10 +91,12 @@ public class MainActivity extends AppCompatActivity {
                 mainGauge.setValue(Double.parseDouble(value1)); //Set value outer ring
                 mainGauge.setSecondValue(Double.parseDouble(value2)); //Set value middle ring
                 mainGauge.setThirdValue(Double.parseDouble(value3)); //Set value inner ring
-
-                tvOuterGauge.setText(sensorName1 + ": " + value1 + " ppm");
-                tvMiddleGauge.setText(sensorName2 + ": " + value2 + " ppm");
-                tvInnerGauge.setText(sensorName3 + ": " + value3 + " ppm");
+                String s1 = sensorName1 + ": " + value1 + " ppm";
+                String s2 = sensorName2 + ": " + value2 + " ppm";
+                String s3 = sensorName3 + ": " + value3 + " ppm";
+                tvOuterGauge.setText(s1);
+                tvMiddleGauge.setText(s2);
+                tvInnerGauge.setText(s3);
 
                 linearOuter.setVisibility(View.VISIBLE);
                 linearMiddle.setVisibility(View.VISIBLE);
@@ -119,47 +130,46 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //TODO:Change range values for warning and danger for each gases
                 carbon_dioxide = Objects.requireNonNull(dataSnapshot.child("Carbon Dioxide").getValue()).toString();
                 cd = Integer.parseInt(carbon_dioxide);
-                if(cd >= 500 && cd <= 1000){
+                if(cd >= 1000 && cd <= 3000){
                     notificationManager.notify(1, warning.setContentText("Carbon Dioxide levels are rising and can affect human health.").build());
-                }else if(cd > 1000){
+                }else if(cd > 3000){
                     notificationManager.notify(2, danger.setContentText("Carbon Dioxide levels have reached a toxic limit.").build());
                 }
                 ammonia = Objects.requireNonNull(dataSnapshot.child("Ammonia").getValue()).toString();
                 am = Integer.parseInt(ammonia);
-                if(am >= 500 && am <= 1000){
+                if(am >= 50 && am <= 200){
                     notificationManager.notify(3, warning.setContentText("Ammonia levels are rising and can affect human health.").build());
-                }else if(am > 1000){
+                }else if(am > 200){
                     notificationManager.notify(4, danger.setContentText("Ammonia levels have reached a toxic limit.").build());
                 }
                 liquefied_petroleum_gas = Objects.requireNonNull(dataSnapshot.child("Liquefied Petroleum Gas").getValue()).toString();
                 lpg = Integer.parseInt(liquefied_petroleum_gas);
-                if(lpg >= 500 && lpg <= 1000){
+                if(lpg >= 1000 && lpg <= 3000){
                     notificationManager.notify(5, warning.setContentText("LPG levels are rising and can affect human health.").build());
-                }else if(lpg > 1000){
+                }else if(lpg > 3000){
                     notificationManager.notify(6, danger.setContentText("LPG levels have reached a toxic limit.").build());
                 }
                 methane = Objects.requireNonNull(dataSnapshot.child("Methane").getValue()).toString();
                 me = Integer.parseInt(methane);
-                if(lpg >= 500 && lpg <= 1000){
+                if(lpg >= 1000 && lpg <= 3000){
                     notificationManager.notify(7, warning.setContentText("Methane levels are rising and can affect human health.").build());
-                }else if(lpg > 1000){
+                }else if(lpg > 3000){
                     notificationManager.notify(8, danger.setContentText("Methane levels have reached a toxic limit.").build());
                 }
                 alcohol = Objects.requireNonNull(dataSnapshot.child("Alcohol").getValue()).toString();
                 al = Integer.parseInt(alcohol);
-                if(al >= 500 && al <= 1000){
+                if(al >= 1000 && al <= 3000){
                     notificationManager.notify(9, warning.setContentText("Alcohol levels are rising and can affect human health.").build());
-                }else if(al > 1000){
+                }else if(al > 3000){
                     notificationManager.notify(10, danger.setContentText("Alcohol levels have reached a toxic limit.").build());
                 }
                 carbon_monoxide = Objects.requireNonNull(dataSnapshot.child("Carbon Monoxide").getValue()).toString();
                 cm = Integer.parseInt(carbon_monoxide);
-                if(cm >= 500 && cm <= 1000){
+                if(cm >= 200 && cm <= 500){
                     notificationManager.notify(11, warning.setContentText("Carbon Monoxide levels are rising and can affect human health.").build());
-                }else if(cm > 1000){
+                }else if(cm > 500){
                     notificationManager.notify(12, danger.setContentText("Carbon Monoxide levels have reached a toxic limit.").build());
                 }
                 total_volatile_organic_compound = Objects.requireNonNull(dataSnapshot.child("Total Volatile Organic Compound").getValue()).toString();
@@ -218,7 +228,12 @@ public class MainActivity extends AppCompatActivity {
             case "Liquefied Petroleum Gas":
             case "Methane":
                 mainGauge.setMinValue(0);
-                mainGauge.setMaxValue(10000);
+                mainGauge.setMaxValue(1000);
+                mainGauge.addRange(outer);
+                break;
+            case "Carbon Monoxide":
+                mainGauge.setMinValue(0);
+                mainGauge.setMaxValue(100);
                 mainGauge.addRange(outer);
                 break;
             case "Ammonia":
@@ -227,18 +242,13 @@ public class MainActivity extends AppCompatActivity {
                 mainGauge.addRange(outer);
                 break;
             case "Carbon Dioxide":
-                mainGauge.setMinValue(400);
-                mainGauge.setMaxValue(29206);
-                mainGauge.addRange(outer);
-                break;
-            case "Carbon Monoxide":
                 mainGauge.setMinValue(0);
-                mainGauge.setMaxValue(1000);
+                mainGauge.setMaxValue(2920);
                 mainGauge.addRange(outer);
                 break;
             case "Total Volatile Organic Compound":
                 mainGauge.setMinValue(0);
-                mainGauge.setMaxValue(32768);
+                mainGauge.setMaxValue(3276);
                 mainGauge.addRange(outer);
                 break;
         }
@@ -252,7 +262,12 @@ public class MainActivity extends AppCompatActivity {
             case "Liquefied Petroleum Gas":
             case "Methane":
                 mainGauge.setSecondMinValue(0);
-                mainGauge.setSecondMaxValue(10000);
+                mainGauge.setSecondMaxValue(1000);
+                mainGauge.addSecondRange(middle);
+                break;
+            case "Carbon Monoxide":
+                mainGauge.setSecondMinValue(0);
+                mainGauge.setSecondMaxValue(100);
                 mainGauge.addSecondRange(middle);
                 break;
             case "Ammonia":
@@ -261,18 +276,13 @@ public class MainActivity extends AppCompatActivity {
                 mainGauge.addSecondRange(middle);
                 break;
             case "Carbon Dioxide":
-                mainGauge.setSecondMinValue(400);
-                mainGauge.setSecondMaxValue(29206);
-                mainGauge.addSecondRange(middle);
-                break;
-            case "Carbon Monoxide":
                 mainGauge.setSecondMinValue(0);
-                mainGauge.setSecondMaxValue(1000);
+                mainGauge.setSecondMaxValue(2920);
                 mainGauge.addSecondRange(middle);
                 break;
             case "Total Volatile Organic Compound":
                 mainGauge.setSecondMinValue(0);
-                mainGauge.setSecondMaxValue(32768);
+                mainGauge.setSecondMaxValue(3276);
                 mainGauge.addSecondRange(middle);
                 break;
         }
@@ -281,33 +291,33 @@ public class MainActivity extends AppCompatActivity {
     public void setInnerRing(){
         Range inner = new Range();
         inner.setColor(Color.parseColor("#d18ca0"));
-        switch (sharedPreferencesHelper.getMiddleSpinnerGas()) {
+        switch (sharedPreferencesHelper.getInnerSpinnerGas()) {
             case "Alcohol":
             case "Liquefied Petroleum Gas":
             case "Methane":
                 mainGauge.setThirdMinValue(0);
-                mainGauge.setThirdMaxValue(10000);
+                mainGauge.setThirdMaxValue(1000);
+                mainGauge.addThirdRange(inner);
+                break;
+            case "Carbon Monoxide":
+                mainGauge.setThirdMinValue(0);
+                mainGauge.setThirdMaxValue(100);
                 mainGauge.addThirdRange(inner);
                 break;
             case "Ammonia":
                 mainGauge.setThirdMinValue(0);
                 mainGauge.setThirdMaxValue(300);
-                mainGauge.addRange(inner);
+                mainGauge.addThirdRange(inner);
                 break;
             case "Carbon Dioxide":
-                mainGauge.setThirdMinValue(400);
-                mainGauge.setThirdMaxValue(29206);
-                mainGauge.addRange(inner);
-                break;
-            case "Carbon Monoxide":
                 mainGauge.setThirdMinValue(0);
-                mainGauge.setThirdMaxValue(1000);
-                mainGauge.addRange(inner);
+                mainGauge.setThirdMaxValue(2920);
+                mainGauge.addThirdRange(inner);
                 break;
             case "Total Volatile Organic Compound":
                 mainGauge.setThirdMinValue(0);
-                mainGauge.setThirdMaxValue(32768);
-                mainGauge.addRange(inner);
+                mainGauge.setThirdMaxValue(3276);
+                mainGauge.addThirdRange(inner);
                 break;
         }
     }
@@ -336,7 +346,7 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                double value1 =  Double.parseDouble(String.valueOf(snapshot.child("Carbon Dioxide").getValue()));
+                double value1 = Double.parseDouble(String.valueOf(snapshot.child("Carbon Dioxide").getValue()));
                 double value2 = Double.parseDouble(String.valueOf(snapshot.child("Ammonia").getValue()));
                 double value3 = Double.parseDouble(String.valueOf(snapshot.child("Liquefied Petroleum Gas").getValue()));
                 double value4 = Double.parseDouble(String.valueOf(snapshot.child("Methane").getValue()));

@@ -57,6 +57,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
 
     // Firebase Database Reference
     DatabaseReference databaseReference;
+    SharedPreferencesHelper sharedPreferencesHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,10 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference();  //get instance for firebase
-
+        sharedPreferencesHelper = new SharedPreferencesHelper(getApplicationContext());
+        if(sharedPreferencesHelper.getLocation().equals("")){
+            startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+        }
         initViews();
         setListeners();
         initializeGaugesValues();
@@ -386,10 +390,10 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.ivCO2:
                 String sensorNameCO2 = tvSensorNameCO2.getText().toString();
-                String marketNameCO2 = "SparkFun CCS811 board";
+                String marketNameCO2 = "SparkFun CCS811 Sensor";
                 String gasDetectionCO2 = tvSensorNameCO2.getText().toString();
-                String dangersCO2 = "CO\u2082 produces many health effects, such as headaches, dizziness, restlessness," +
-                        " difficulty breathing, sweating, increased heart rate, and convulsions";
+                String dangersCO2 = "High concentrations of CO\u2082 in the air can have many negative effects, such as headaches, dizziness, restlessness," +
+                        " difficulty breathing, sweating, increased heart rate, and convulsions.";
                 String moreInfoCO2 = "https://www.cdc.gov/niosh/npg/npgd0103.html";
                 showDialog(sensorNameCO2, marketNameCO2, gasDetectionCO2, dangersCO2, moreInfoCO2);
                 break;
@@ -397,8 +401,8 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
                 String sensorNameMQ135 = tvSensorNameMQ135.getText().toString();
                 String marketNameMQ135 = "MQ135 Sensor";
                 String gasDetectionMQ135 = tvSensorNameMQ135.getText().toString();
-                String dangersMQ135 = "High concentrations of Ammonia in air causes immediate burning " +
-                        "of the eyes, nose, throat and respiratory tract and can result in blindness, lung damage or death";
+                String dangersMQ135 = "High concentrations of Ammonia in the air causes immediate burning " +
+                        "of the eyes, nose, throat and respiratory tract and can result in blindness, lung damage or death.";
                 String moreInfoMQ135 = "https://www.ccohs.ca/oshanswers/chemicals/chem_profiles/ammonia.html";
                 showDialog(sensorNameMQ135, marketNameMQ135, gasDetectionMQ135, dangersMQ135, moreInfoMQ135);
                 break;
@@ -406,16 +410,17 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
                 String sensorNameMQ2 = tvSensorNameMQ2.getText().toString();
                 String marketNameMQ2 = "MQ2 Sensor";
                 String gasDetectionMQ2 = tvSensorNameMQ2.getText().toString();
-                String dangersMQ2 = "Inhaling harmful smoke can inflame lungs and airway, causing them to swell and block oxygen";
-                String moreInfoMQ2 = "https://www.epa.gov/pm-pollution/how-smoke-fires-can-affect-your-health";
+                String dangersMQ2 = "Inhaling LPG vapors at high concentrations even for a short time " +
+                        "can cause asphyxiation, seizures, heart problems and death.";
+                String moreInfoMQ2 = "https://www.hsa.ie/eng/Topics/Liquid_Petroleum_Gas_LPG_/";
                 showDialog(sensorNameMQ2, marketNameMQ2, gasDetectionMQ2, dangersMQ2, moreInfoMQ2);
                 break;
             case R.id.ivMQ4:
                 String sensorNameMQ4 = tvSensorNameMQ4.getText().toString();
                 String marketNameMQ4 = "MQ4 Sensor";
                 String gasDetectionMQ4 = tvSensorNameMQ4.getText().toString();
-                String dangersMQ4 = "Methane case reduce the amount of oxygen breathed from the air " +
-                        "and can cause vision problems and unconsciousness";
+                String dangersMQ4 = "Methane can reduce the amount of oxygen breathed from the air " +
+                        "and can cause vision problems and unconsciousness.";
                 String moreInfoMQ4 = "https://sciencing.com/what-are-the-dangers-of-methane-gas-13404265.html";
                 showDialog(sensorNameMQ4, marketNameMQ4, gasDetectionMQ4, dangersMQ4, moreInfoMQ4);
                 break;
@@ -423,27 +428,26 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
                 String sensorNameMQ8 = tvSensorNameMQ8.getText().toString();
                 String marketNameMQ8 = "MQ8 Sensor";
                 String gasDetectionMQ8 = tvSensorNameMQ8.getText().toString();
-                String dangersMQ8 = "Hydrogen could cause death in case of high concentrations in air," +
-                        " since hydrogen is highly compressed and liquid hydrogen is extremely cold";
-                String moreInfoMQ8 = "https://www.nap.edu/read/12032/chapter/9#155";
+                String dangersMQ8 = "Exposure to Ethyl Alcohol can cause headache, drowsiness, nausea, vomiting, and unconsciousness.";
+                String moreInfoMQ8 = "https://www.poison.org/articles/inhaling-alcohol-is-dangerous";
                 showDialog(sensorNameMQ8, marketNameMQ8, gasDetectionMQ8, dangersMQ8, moreInfoMQ8);
                 break;
             case R.id.ivMQ9:
                 String sensorNameMQ9 = tvSensorNameMQ9.getText().toString();
                 String marketNameMQ9 = "MQ9 Sensor";
                 String gasDetectionMQ9 = tvSensorNameMQ9.getText().toString();
-                String dangersMQ9 = "CO can lead to death, in case the human body is exposed to over " +
-                        "100 ppm or greater, since inhaling CO replaces the oxygen in human blood";
+                String dangersMQ9 = "CO can lead to death when exposed to a concentration of " +
+                        "100 ppm or greater by replacing the oxygen in human blood.";
                 String moreInfoMQ9 = "https://www.nhs.uk/conditions/carbon-monoxide-poisoning/";
                 showDialog(sensorNameMQ9, marketNameMQ9, gasDetectionMQ9, dangersMQ9, moreInfoMQ9);
                 break;
             case R.id.ivTVOC:
                 String sensorNameTVOC = tvSensorNameTVOC.getText().toString();
-                String marketNameTVOC = "SparkFun CCS811 board";
+                String marketNameTVOC = "SparkFun CCS811 Sensor";
                 String gasDetectionTVOC = tvSensorNameTVOC.getText().toString();
-                String dangersTVOC = "VOCs can irritate the eyes, nose and throat, and can cause difficulty " +
-                        "breathing and nausea as well as damaging the central nervous system";
-                String moreInfoTVOC = "shorturl.at/mqwxK";
+                String dangersTVOC = "VOCs can irritate the eyes, nose and throat. It can also cause difficulty " +
+                        "breathing, nausea and can damage the central nervous system.";
+                String moreInfoTVOC = "https://www.health.state.mn.us/communities/environment/air/toxins/voc.htm";
                 showDialog(sensorNameTVOC, marketNameTVOC, gasDetectionTVOC, dangersTVOC, moreInfoTVOC);
                 break;
         }
@@ -459,7 +463,7 @@ public class LiveMonitoring extends AppCompatActivity implements View.OnClickLis
      */
     private void showDialog(String sensorName, String marketName, String gasDetection, String dangers, String moreInfo) {
         SensorInfoDialog dialog = new SensorInfoDialog(LiveMonitoring.this,
-                sensorName + " Info", marketName, gasDetection + " Gases", dangers, moreInfo);
+                sensorName + " Info", marketName, gasDetection, dangers, moreInfo);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
     }

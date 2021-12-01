@@ -1,20 +1,15 @@
 package com.example.ceon390_projectgroup;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import java.util.Objects;
 
 public class signUpActivity extends AppCompatActivity {
 
@@ -33,12 +28,7 @@ public class signUpActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailSignUpEditText);
         passwordEditText = findViewById(R.id.passwordSignUpEditText);
 
-        createAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createUser();
-            }
-        });
+        createAccountButton.setOnClickListener(view -> createUser());
     }
 
     private void createUser(){
@@ -52,16 +42,13 @@ public class signUpActivity extends AppCompatActivity {
             passwordEditText.setError("Password cannot be empty");
             passwordEditText.requestFocus();
         } else {
-            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(signUpActivity.this,"User registered successfully",Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-                        overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right);
-                    } else {
-                        Toast.makeText(signUpActivity.this,"Registration Error: " + task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                    }
+            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    Toast.makeText(signUpActivity.this,"User registered successfully",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                    overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right);
+                } else {
+                    Toast.makeText(signUpActivity.this,"Registration Error: " + Objects.requireNonNull(task.getException()).getMessage(),Toast.LENGTH_LONG).show();
                 }
             });
         }

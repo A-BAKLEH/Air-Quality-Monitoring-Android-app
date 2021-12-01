@@ -57,8 +57,6 @@ public class SensorInfoDialog extends Dialog {
         tvMoreInfo.setText(moreInfo);
 
         // Done button to dismiss the dialog
-        btnDone.setOnClickListener(v -> {
-            dismiss();
-        });
+        btnDone.setOnClickListener(v -> dismiss());
     }
 }
