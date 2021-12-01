@@ -11,12 +11,12 @@ public class FirebaseData {
     public String Total_Volatile_Organic_Compound;
 
     public FirebaseData(String al, String am, String cd, String cm, String lpg, String m, String t){
-        this.Alcohol = al;
-        this.Ammonia = am;
-        this.Carbon_Dioxide = cd;
-        this.Carbon_Monoxide = cm;
-        this.Liquefied_Petroleum_Gas = lpg;
-        this.Methane = m;
-        this.Total_Volatile_Organic_Compound = t;
+        this.Alcohol = al + " ppm";
+        this.Ammonia = am + " ppm";
+        this.Carbon_Dioxide = cd + " ppm";
+        this.Carbon_Monoxide = cm + " ppm";
+        this.Liquefied_Petroleum_Gas = lpg + " ppm";
+        this.Methane = m + " ppm";
+        this.Total_Volatile_Organic_Compound = t + " ppm";
     }
 }

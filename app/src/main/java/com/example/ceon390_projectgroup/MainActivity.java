@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             FirebaseUserMetadata metadata = mAuth.getCurrentUser().getMetadata();
             if(sharedPreferencesHelper.getLocation().equals("")){
-                if(metadata.getCreationTimestamp() == metadata.getLastSignInTimestamp()) {
+                if(Objects.requireNonNull(metadata).getCreationTimestamp() == metadata.getLastSignInTimestamp()) {
                 startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
                 }
             }
@@ -91,10 +91,12 @@ public class MainActivity extends AppCompatActivity {
                 mainGauge.setValue(Double.parseDouble(value1)); //Set value outer ring
                 mainGauge.setSecondValue(Double.parseDouble(value2)); //Set value middle ring
                 mainGauge.setThirdValue(Double.parseDouble(value3)); //Set value inner ring
-
-                tvOuterGauge.setText(sensorName1 + ": " + value1 + " ppm");
-                tvMiddleGauge.setText(sensorName2 + ": " + value2 + " ppm");
-                tvInnerGauge.setText(sensorName3 + ": " + value3 + " ppm");
+                String s1 = sensorName1 + ": " + value1 + " ppm";
+                String s2 = sensorName2 + ": " + value2 + " ppm";
+                String s3 = sensorName3 + ": " + value3 + " ppm";
+                tvOuterGauge.setText(s1);
+                tvMiddleGauge.setText(s2);
+                tvInnerGauge.setText(s3);
 
                 linearOuter.setVisibility(View.VISIBLE);
                 linearMiddle.setVisibility(View.VISIBLE);
