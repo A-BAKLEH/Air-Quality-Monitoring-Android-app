@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 //TODO:Change range values for warning and danger for each gases
                 carbon_dioxide = Objects.requireNonNull(dataSnapshot.child("Carbon Dioxide").getValue()).toString();
                 cd = Integer.parseInt(carbon_dioxide);
-                if(cd >= 400 && cd <= 1000){
+                if(cd >= 600 && cd <= 1000){
                     notificationManager.notify(1, warning.setContentText("Carbon Dioxide levels are rising and can affect human health.").build());
                 }else if(cd > 1000){
                     notificationManager.notify(2, danger.setContentText("Carbon Dioxide levels have reached a toxic limit.").build());
@@ -226,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
             case "Alcohol":
             case "Liquefied Petroleum Gas":
             case "Methane":
+            case "Carbon Monoxide":
                 mainGauge.setMinValue(0);
                 mainGauge.setMaxValue(100);
                 mainGauge.addRange(outer);
@@ -238,11 +239,6 @@ public class MainActivity extends AppCompatActivity {
             case "Carbon Dioxide":
                 mainGauge.setMinValue(0);
                 mainGauge.setMaxValue(2920);
-                mainGauge.addRange(outer);
-                break;
-            case "Carbon Monoxide":
-                mainGauge.setMinValue(0);
-                mainGauge.setMaxValue(100);
                 mainGauge.addRange(outer);
                 break;
             case "Total Volatile Organic Compound":
@@ -260,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
             case "Alcohol":
             case "Liquefied Petroleum Gas":
             case "Methane":
+            case "Carbon Monoxide":
                 mainGauge.setSecondMinValue(0);
                 mainGauge.setSecondMaxValue(100);
                 mainGauge.addSecondRange(middle);
@@ -272,11 +269,6 @@ public class MainActivity extends AppCompatActivity {
             case "Carbon Dioxide":
                 mainGauge.setSecondMinValue(0);
                 mainGauge.setSecondMaxValue(2920);
-                mainGauge.addSecondRange(middle);
-                break;
-            case "Carbon Monoxide":
-                mainGauge.setSecondMinValue(0);
-                mainGauge.setSecondMaxValue(100);
                 mainGauge.addSecondRange(middle);
                 break;
             case "Total Volatile Organic Compound":
@@ -294,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
             case "Alcohol":
             case "Liquefied Petroleum Gas":
             case "Methane":
+            case "Carbon Monoxide":
                 mainGauge.setThirdMinValue(0);
                 mainGauge.setThirdMaxValue(100);
                 mainGauge.addThirdRange(inner);
@@ -306,11 +299,6 @@ public class MainActivity extends AppCompatActivity {
             case "Carbon Dioxide":
                 mainGauge.setThirdMinValue(0);
                 mainGauge.setThirdMaxValue(2920);
-                mainGauge.addThirdRange(inner);
-                break;
-            case "Carbon Monoxide":
-                mainGauge.setThirdMinValue(0);
-                mainGauge.setThirdMaxValue(100);
                 mainGauge.addThirdRange(inner);
                 break;
             case "Total Volatile Organic Compound":

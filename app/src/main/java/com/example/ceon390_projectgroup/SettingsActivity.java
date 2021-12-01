@@ -25,7 +25,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class SettingsActivity extends AppCompatActivity {
 
