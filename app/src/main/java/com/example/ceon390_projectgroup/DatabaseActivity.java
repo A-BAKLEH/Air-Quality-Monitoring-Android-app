@@ -2,7 +2,13 @@ package com.example.ceon390_projectgroup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +26,10 @@ public class DatabaseActivity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
     SharedPreferencesHelper sharedPreferencesHelper;
     DatabaseReference databaseReference;
+
     ListView databaseList;
+    Animation refreshAnimation;
+    ImageButton refreshButton;
 
 
     @Override
@@ -35,9 +44,19 @@ public class DatabaseActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
         }
 
+        refreshAnimation = new RotateAnimation(0.0f, 360.0f,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                0.5f);
+        refreshAnimation.setRepeatCount(0);
+        refreshAnimation.setDuration(1000);
+
+
+
+
 
         navBar  = findViewById(R.id.navBar);
         navBar.setSelectedItemId(R.id.database_nav);
+        refreshButton = findViewById(R.id.refreshButton);
 
         navBar.setOnItemSelectedListener(item -> {
             if(item.getItemId() == R.id.live_nav){
@@ -56,6 +75,16 @@ public class DatabaseActivity extends AppCompatActivity {
             return false;
         });
         setDatabaseList();
+
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refreshButton.setAnimation(refreshAnimation);
+                view.startAnimation(refreshAnimation);
+                sharedPreferencesHelper.saveFilter("");
+                setDatabaseList();
+            }
+        });
 
     }
 
@@ -88,6 +117,10 @@ public class DatabaseActivity extends AppCompatActivity {
         }
     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,viewDatabaseList);
     databaseList.setAdapter(arrayAdapter);
+    }
+
+    public void setRefreshAnimation(){
+        refreshButton.setAnimation(refreshAnimation);
     }
 
 }
