@@ -132,44 +132,44 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 carbon_dioxide = Objects.requireNonNull(dataSnapshot.child("Carbon Dioxide").getValue()).toString();
                 cd = Integer.parseInt(carbon_dioxide);
-                if(cd >= 600 && cd <= 1000){
+                if(cd >= 1000 && cd <= 3000){
                     notificationManager.notify(1, warning.setContentText("Carbon Dioxide levels are rising and can affect human health.").build());
-                }else if(cd > 1000){
+                }else if(cd > 3000){
                     notificationManager.notify(2, danger.setContentText("Carbon Dioxide levels have reached a toxic limit.").build());
                 }
                 ammonia = Objects.requireNonNull(dataSnapshot.child("Ammonia").getValue()).toString();
                 am = Integer.parseInt(ammonia);
-                if(am >= 500 && am <= 1000){
+                if(am >= 50 && am <= 200){
                     notificationManager.notify(3, warning.setContentText("Ammonia levels are rising and can affect human health.").build());
-                }else if(am > 1000){
+                }else if(am > 200){
                     notificationManager.notify(4, danger.setContentText("Ammonia levels have reached a toxic limit.").build());
                 }
                 liquefied_petroleum_gas = Objects.requireNonNull(dataSnapshot.child("Liquefied Petroleum Gas").getValue()).toString();
                 lpg = Integer.parseInt(liquefied_petroleum_gas);
-                if(lpg >= 500 && lpg <= 1000){
+                if(lpg >= 1000 && lpg <= 3000){
                     notificationManager.notify(5, warning.setContentText("LPG levels are rising and can affect human health.").build());
-                }else if(lpg > 1000){
+                }else if(lpg > 3000){
                     notificationManager.notify(6, danger.setContentText("LPG levels have reached a toxic limit.").build());
                 }
                 methane = Objects.requireNonNull(dataSnapshot.child("Methane").getValue()).toString();
                 me = Integer.parseInt(methane);
-                if(lpg >= 500 && lpg <= 1000){
+                if(lpg >= 1000 && lpg <= 3000){
                     notificationManager.notify(7, warning.setContentText("Methane levels are rising and can affect human health.").build());
-                }else if(lpg > 1000){
+                }else if(lpg > 3000){
                     notificationManager.notify(8, danger.setContentText("Methane levels have reached a toxic limit.").build());
                 }
                 alcohol = Objects.requireNonNull(dataSnapshot.child("Alcohol").getValue()).toString();
                 al = Integer.parseInt(alcohol);
-                if(al >= 500 && al <= 1000){
+                if(al >= 1000 && al <= 3000){
                     notificationManager.notify(9, warning.setContentText("Alcohol levels are rising and can affect human health.").build());
-                }else if(al > 1000){
+                }else if(al > 3000){
                     notificationManager.notify(10, danger.setContentText("Alcohol levels have reached a toxic limit.").build());
                 }
                 carbon_monoxide = Objects.requireNonNull(dataSnapshot.child("Carbon Monoxide").getValue()).toString();
                 cm = Integer.parseInt(carbon_monoxide);
-                if(cm >= 500 && cm <= 1000){
+                if(cm >= 200 && cm <= 500){
                     notificationManager.notify(11, warning.setContentText("Carbon Monoxide levels are rising and can affect human health.").build());
-                }else if(cm > 1000){
+                }else if(cm > 500){
                     notificationManager.notify(12, danger.setContentText("Carbon Monoxide levels have reached a toxic limit.").build());
                 }
                 total_volatile_organic_compound = Objects.requireNonNull(dataSnapshot.child("Total Volatile Organic Compound").getValue()).toString();
